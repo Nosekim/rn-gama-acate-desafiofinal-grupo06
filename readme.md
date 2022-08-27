@@ -12,6 +12,8 @@
 - ``Expo``
 - ``React Native``
 - ``Typescript``
+- ``GraphQL``
+- ``SSO AWS Cognito``
 
 ## ✔️ técnicas utilizadas
 - ``Consumo de API externa com axios``
