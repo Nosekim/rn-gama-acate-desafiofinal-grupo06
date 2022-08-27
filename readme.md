@@ -1,14 +1,12 @@
 # Curso Gama Academy - Acate - Masterclass Semana 01
 
-<div align="center" style="margin: 20px; text-align: center">  
+<!-- <div align="center" style="margin: 20px; text-align: center">  
   <img
     src="https://github.com/Nosekim/acate-rickandmorty/blob/main/Rick-And-Morty-Logo.png"
     alt="Rick and Morty"
     style="display: inline-block; margin: 0 auto; max-width: 300px"
     width="300">
-</div>
-
-Meu nome é Roger Felipe, sou desenvolvedor Fullstack Javascript/Typescript, já programo a quase 10 anos e estou trabalhando com desenvolvimeto em tempo integral a quase 4 anos, esse projeto é o acompanhamento das aulas e masterclass do programa Dev For Tech I Mobile (React Native) - Turma 05.
+</div> -->
 
 ## ✔️ tecnologias utilizadas
 - ``Expo``
