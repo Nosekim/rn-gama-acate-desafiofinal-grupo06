@@ -28,6 +28,22 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Permissão para acessar a galeria para escolher uma foto para adicionar no seu perfil.",
+          "cameraPermission": "Permissão para acessar a camera tirar foto para adicionar no seu perfil."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/assets/notification-icon.png",
+          "color": "#ffffff"
+        }
+      ]
+    ]
   }
 }
