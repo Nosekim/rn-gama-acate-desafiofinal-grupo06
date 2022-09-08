@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "rn-gama-acate-desafiofinal-grupo06",
-    "slug": "rn-gama-acate-desafiofinal-grupo06",
+    "name": "Find Dev",
+    "slug": "find-dev",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#272629"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,13 +18,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com-find-dev.grupo06"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "backgroundColor": "#272629"
+      },
+      "package": "com.find-dev.grupo06",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,15 +40,15 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Permissão para acessar a galeria para escolher uma foto para adicionar no seu perfil.",
-          "cameraPermission": "Permissão para acessar a camera tirar foto para adicionar no seu perfil."
+          "photosPermission": "Precisamos de sua permissão para acessar a sua galeria de imagens para que você possa selecionar uma imagem para o seu perfil.",
+          "cameraPermission": "Precisamos de sua permissão para acessar a sua câmera para que você possa tirar uma foto para adicionar ao seu perfil."
         }
       ],
       [
         "expo-notifications",
         {
-          "icon": "./local/assets/notification-icon.png",
-          "color": "#ffffff"
+          "icon": "./src/assets/notification-icon.png",
+          "color": "#272629"
         }
       ]
     ]
