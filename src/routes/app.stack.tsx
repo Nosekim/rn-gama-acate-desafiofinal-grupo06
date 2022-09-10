@@ -1,15 +1,18 @@
-// In App.js in a new project
-
-import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SampleAppScreen from "../views/SampleApp";
+import GetStarted from "../views/GetStarted";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 function AppStack() {
   return (
     <Navigator>
-      <Screen name="App" component={SampleAppScreen} />
+
+        <Screen 
+          name="getStarted" 
+          component={GetStarted} 
+          options={{ headerShown: false }}
+        />
+
     </Navigator>
   );
 }
