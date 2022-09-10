@@ -19,14 +19,14 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com-find-dev.grupo06"
+      "bundleIdentifier": "com.acategama.finddev.grupo06"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#272629"
       },
-      "package": "com.find-dev.grupo06",
+      "package": "com.acategama.finddev.grupo06",
       "versionCode": 1,
       "permissions": [
         "CAMERA",
