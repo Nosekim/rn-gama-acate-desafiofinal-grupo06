@@ -10,7 +10,7 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "#27272b"
+    background: "#272629"
   }
 }
 
@@ -20,7 +20,7 @@ function RootRoutes() {
 
   return (
     <NavigationContainer theme={theme}>
-      {isLoggedIn ? <LoginStack /> : <AppStack />}
+      {isLoggedIn ? <AppStack /> : <LoginStack />}
     </NavigationContainer>
   );
 }

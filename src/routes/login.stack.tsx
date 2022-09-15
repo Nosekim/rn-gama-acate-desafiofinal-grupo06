@@ -1,17 +1,23 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../views/Home";
+import GetStarted from "../views/GetStarted";
 
 const { Navigator, Screen } = createNativeStackNavigator();
+import RecoverPassword from "../views/RecoverPassword";
 
 function LoginStack() {
   return (
     <Navigator>
 
-      <Screen 
-        name="Home" 
-        component={Home} 
-        options={{ headerShown: false }}
-      />
+        <Screen 
+          name="GetStarted" 
+          component={GetStarted} 
+          options={{ headerShown: false }}
+        />
+
+        <Screen 
+          name="Recuperação de Senha" 
+          component={RecoverPassword} 
+        />
 
     </Navigator>
   );

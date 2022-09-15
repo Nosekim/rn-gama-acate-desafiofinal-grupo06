@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import GetStarted from "../views/GetStarted";
+import Home from "../views/Home";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -8,8 +8,8 @@ function AppStack() {
     <Navigator>
 
         <Screen 
-          name="getStarted" 
-          component={GetStarted} 
+          name="Home" 
+          component={Home} 
           options={{ headerShown: false }}
         />
 
