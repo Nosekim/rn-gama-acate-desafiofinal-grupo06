@@ -20,7 +20,7 @@ function RootRoutes() {
 
   return (
     <NavigationContainer theme={theme}>
-      {isLoggedIn ? <LoginStack /> : <AppStack />}
+      {isLoggedIn ? <AppStack /> : <LoginStack />}
     </NavigationContainer>
   );
 }

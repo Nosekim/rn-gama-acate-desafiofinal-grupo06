@@ -1,21 +1,19 @@
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
-import { TextDescription, ContainerIndicators, Indicator } from './styles';
+import { ContainerIndicators, Indicator } from './styles';
 
+import DescriptionScreen from '../../components/DescriptionScreen';
 import ActionButton from '../../components/ActionButton';
 import Link from '../../components/Link';
 
 const RouteSearch = () => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-        <Image source={require('../../assets/ilustrations/search.png')} />
-
-        <TextDescription>Encontre desenvolvedores que trabalham com as linguagens que você está procurando</TextDescription>
-
-    </View>
+    <DescriptionScreen 
+        image={require('../../assets/ilustrations/search.png')}
+        text='Encontre desenvolvedores que trabalham com as linguagens que você está procurando'
+    />
 )
 
 export default function GetStarted() {
