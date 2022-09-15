@@ -1,13 +1,6 @@
 import styled from "styled-components/native";
 import { widthScreen } from "../../global/GlobalStyles";
 
-export const TextDescription = styled.Text`
-    color: #fff;
-    text-align: center;
-    padding: 10px 15px;
-    font-size: 15px;
-    line-height: 22px;
-` 
 export const ContainerIndicators = styled.View`
     width: ${widthScreen}px; 
     flex-direction: row; 
