@@ -7,7 +7,6 @@ import RecoverPassword from "../views/RecoverPassword";
 function LoginStack() {
   return (
     <Navigator>
-
         <Screen 
           name="GetStarted" 
           component={GetStarted} 
@@ -18,7 +17,6 @@ function LoginStack() {
           name="Recuperação de Senha" 
           component={RecoverPassword} 
         />
-
     </Navigator>
   );
 }
