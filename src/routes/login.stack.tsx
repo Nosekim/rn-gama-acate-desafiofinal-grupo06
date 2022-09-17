@@ -1,8 +1,5 @@
-// In App.js in a new project
-
-import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SampleLoginScreen from "../views/SampleLogin";
+import GetStarted from "../views/GetStarted";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 import RecoverPassword from "../views/RecoverPassword";
@@ -10,8 +7,16 @@ import RecoverPassword from "../views/RecoverPassword";
 function LoginStack() {
   return (
     <Navigator>
-      <Screen name="Recupeção de senha" component={RecoverPassword} />
-      <Screen name="Login" component={SampleLoginScreen} />
+        <Screen 
+          name="GetStarted" 
+          component={GetStarted} 
+          options={{ headerShown: false }}
+        />
+
+        <Screen 
+          name="Recuperação de Senha" 
+          component={RecoverPassword} 
+        />
     </Navigator>
   );
 }
