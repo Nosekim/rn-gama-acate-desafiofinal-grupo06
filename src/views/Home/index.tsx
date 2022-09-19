@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
 
-import DevsList from '../DevsList';
+import Devs from '../Devs';
 import Favorites from '../Favorites';
 import Profile from '../Profile';
 
@@ -59,8 +59,8 @@ export default function Home() {
             >
             
                 <Screen 
-                    name='DevsList'
-                    component={DevsList}
+                    name='Devs'
+                    component={Devs}
                     options={{
                         tabBarLabel: 'devs',
                         tabBarIcon: ({ focused, color }) => (

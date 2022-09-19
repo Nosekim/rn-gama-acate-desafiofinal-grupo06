@@ -1,7 +1,7 @@
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
-import { IsLoggedInData } from "../store/modules/auth/reducer";
+import { IAuth } from "../types";
 
 import AppStack from "./app.stack";
 import LoginStack from "./login.stack";
@@ -16,7 +16,7 @@ const theme = {
 
 function RootRoutes() {
 
-  const isLoggedIn = useSelector(IsLoggedInData);
+  const { isLoggedIn } = useSelector((state: IAuth) => state.auth)
 
   return (
     <NavigationContainer theme={theme}>
