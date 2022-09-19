@@ -1,16 +1,26 @@
-// In App.js in a new project
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 
-import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { IsLoggedInData } from "../store/modules/auth/reducer";
 
 import AppStack from "./app.stack";
 import LoginStack from "./login.stack";
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "#272629"
+  }
+}
+
 function RootRoutes() {
-  const isLoggedIn = false;
+
+  const isLoggedIn = useSelector(IsLoggedInData);
+
   return (
-    <NavigationContainer>
-      {isLoggedIn ? <AppStack /> : <LoginStack />}
+    <NavigationContainer theme={theme}>
+      {isLoggedIn ? <LoginStack /> : <AppStack />}
     </NavigationContainer>
   );
 }

@@ -1908,7 +1908,7 @@
     "@types/react-native" "^0.65"
     "@types/styled-components" "*"
 
-"@types/styled-components@*", "@types/styled-components@^5.1.26":
+"@types/styled-components@*":
   "integrity" "sha512-KuKJ9Z6xb93uJiIyxo/+ksS7yLjS1KzG6iv5i78dhVg/X3u5t1H7juRWqVmodIdz6wGVaIApo1u01kmFRdJHVw=="
   "resolved" "https://registry.npmjs.org/@types/styled-components/-/styled-components-5.1.26.tgz"
   "version" "5.1.26"
@@ -5789,7 +5789,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.5.10", "prop-types@^15.8.1":
+"prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -5922,6 +5922,11 @@
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.7.tgz"
   "version" "0.0.7"
 
+"react-native-pager-view@*", "react-native-pager-view@^6.0.0":
+  "integrity" "sha512-0qUMUmA/Lhv76F+fbCcYB+iuODH6Lp6E1EYlXw+GM3Ns3FaKFtBaVYXKQSfNhqnTUg9YEOY3HuX+ZMKBSHwNbA=="
+  "resolved" "https://registry.npmjs.org/react-native-pager-view/-/react-native-pager-view-6.0.0.tgz"
+  "version" "6.0.0"
+
 "react-native-reanimated@~2.9.1":
   "integrity" "sha512-309SIhDBwY4F1n6e5Mr5D1uPZm2ESIcmZsGXHUu8hpKX4oIOlZj2MilTk+kHhi05LjChoJkcpfkstotCJmPRPg=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.9.1.tgz"
@@ -5936,25 +5941,23 @@
     "setimmediate" "^1.0.5"
     "string-hash-64" "^1.0.3"
 
-"react-native-safe-area-context@>= 3.0.0", "react-native-safe-area-context@4.3.1":
-  "integrity" "sha512-cEr7fknJCToTrSyDCVNg0GRdRMhyLeQa2NZwVCuzEQcWedOw/59ExomjmzCE4rxrKXs6OJbyfNtFRNyewDaHuA=="
-  "resolved" "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.3.1.tgz"
-  "version" "4.3.1"
+"react-native-safe-area-context@^4.3.3", "react-native-safe-area-context@>= 3.0.0":
+  "integrity" "sha512-xwsloGLDUzeTN40TIh4Te/zRePSnBAuWlLIiEW3RYE9gHHYslqQWpfK7N24SdAQEH3tHZ+huoYNjo2GQJO/vnQ=="
+  "resolved" "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.3.3.tgz"
+  "version" "4.3.3"
 
-"react-native-screens@>= 3.0.0", "react-native-screens@~3.15.0":
-  "integrity" "sha512-ezC5TibsUYyqPuuHpZoM3iEl6bRzCVBMJeGaFkn7xznuOt1VwkZVub0BvafIEYR/+AQC/RjxzMSQPs1qal0+wA=="
-  "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.15.0.tgz"
-  "version" "3.15.0"
+"react-native-screens@^3.17.0", "react-native-screens@>= 3.0.0":
+  "integrity" "sha512-OZCQU7+3neHNaM19jBkYRjL50kXz7p7MUgWQTCcdRoshcCiolf8aXs4eRVQKGK6m1RmoB8UL0//m5R9KoR+41w=="
+  "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.17.0.tgz"
+  "version" "3.17.0"
   dependencies:
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
-"react-native-swiper@^1.6.0":
-  "integrity" "sha512-OnkTTZi+9uZUgy0uz1I9oYDhCU3z36lZn+LFsk9FXPRelxb/KeABzvPs3r3SrHWy1aA67KGtSFj0xNK2QD0NJQ=="
-  "resolved" "https://registry.npmjs.org/react-native-swiper/-/react-native-swiper-1.6.0.tgz"
-  "version" "1.6.0"
-  dependencies:
-    "prop-types" "^15.5.10"
+"react-native-tab-view@^3.1.1":
+  "integrity" "sha512-M5pRN6utQfytKWoKlKVzg5NbkYu308qNoW1khGTtEOTs1k14p2dHJ/BWOJoJYHKbPVUyZldbG9MFT7gUl4YHnw=="
+  "resolved" "https://registry.npmjs.org/react-native-tab-view/-/react-native-tab-view-3.1.1.tgz"
+  "version" "3.1.1"
 
 "react-native-web@~0.18.7":
   "integrity" "sha512-NOjFgzD0eAldYCpLJIr47FreitcxkJka8CdGBYRmnZLvSU1AUwCR4PtxzHNbb4hAwO+/fKGh+aoRsGSwQo0cBA=="
