@@ -1,113 +1,108 @@
 import { View, FlatList, Image, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome } from "@expo/vector-icons";
 
-import { addFavorite, removeFavorite } from "../../store/modules/devsData/reducer";
+import {
+  addFavorite,
+  removeFavorite,
+} from "../../store/modules/devsData/reducer";
 
 import { IDev, IAppState } from "../../types";
 
-import styles, { CategoryDev, DevCard, FirstLine, ListDevStacks, MainData, NameDev, StackPill, TitleStacks } from "./styles";
+import styles, {
+  CategoryDev,
+  DevCard,
+  FirstLine,
+  ListDevStacks,
+  MainData,
+  NameDev,
+  StackPill,
+  TitleStacks,
+} from "./styles";
 
 import LoadingDevsList from "./loading";
 
 interface IDevsList {
-    data: IDev[];
-    typeList: string;
+  data: IDev[];
+  typeList: string;
+  apolloData: any;
 }
 
-export default function DevsList({ data, typeList }: IDevsList) {
+export default function DevsList({ data, typeList, apolloData }: IDevsList) {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
- 
-    const { categories, stacks, favorites, loadingData } = useSelector((state: IAppState) => state.devs);
+  const { categories, stacks, favorites, loadingData } = useSelector(
+    (state: IAppState) => state.devs
+  );
 
-    if(loadingData)
-        return <LoadingDevsList />;
+  if (loadingData) return <LoadingDevsList />;
 
-    const renderCategoryDev = (id: number) => {
+  const renderCategoryDev = (id: number) => {
+    const category = categories.find((item) => item.id === id);
 
-        const category = categories.find(item => item.id === id);
+    if (category) return <CategoryDev>{category.name}</CategoryDev>;
 
-        if(category)
-            return <CategoryDev>{ category.name }</CategoryDev>
+    return false;
+  };
 
-        return false;    
-    }
+  const renderStackDev = (id: number) => {
+    const stack = stacks.find((item) => item.id === id);
 
-    const renderStackDev = (id: number) => {
+    if (stack) return <StackPill>{stack.label}</StackPill>;
 
-        const stack = stacks.find(item => item.id === id);
+    return false;
+  };
 
-        if(stack)
-            return <StackPill>{ stack.label }</StackPill>
+  const manageFavorites = (id: number) => {
+    if (favorites.includes(id)) dispatch(removeFavorite(id));
+    else dispatch(addFavorite(id));
+  };
 
-        return false; 
-    }
+  const _renderItem = (item: IDev) => (
+    <DevCard>
+      <FirstLine>
+        <MainData>
+          <Image style={styles.photoDev} source={{ uri: item.photo }} />
 
-    const manageFavorites = (id: number) => {
+          <View>
+            <NameDev>{item.name}</NameDev>
 
-        if(favorites.includes(id))
-            dispatch(removeFavorite(id));
-        else
-            dispatch(addFavorite(id));    
-    }
+            <CategoryDev>{item.job}</CategoryDev>
+          </View>
+        </MainData>
 
-    const _renderItem = (item: IDev) => (
-        <DevCard>
+        <TouchableOpacity
+          //onPress={() => manageFavorites(item.id)}
+          activeOpacity={0.3}
+        >
+          <FontAwesome
+            //name={favorites.includes(item.id) ? "heart" : "heart-o"}
+            name="heart-o"
+            size={20}
+            color="#bfbfbf"
+            //color={favorites.includes(item.id) ? "#f14a41" : }
+          />
+        </TouchableOpacity>
+      </FirstLine>
 
-            <FirstLine>
+      <TitleStacks>principais tecnologias</TitleStacks>
 
-                <MainData>
+      <ListDevStacks>
+        {item.stack.map((s) => (
+          <StackPill>{s.name}</StackPill>
+        ))}
+      </ListDevStacks>
+    </DevCard>
+  );
 
-                    <Image 
-                        style={styles.photoDev}
-                        source={{ uri: item.photo }}
-                    />
-
-                    <View>
-
-                        <NameDev>{ item.name }</NameDev>
-
-                        { renderCategoryDev(item.category) }
-
-                    </View>
-
-                </MainData>
-
-                <TouchableOpacity
-                    onPress={() => manageFavorites(item.id)}
-                    activeOpacity={.3}
-                >
-
-                    <FontAwesome 
-                        name={favorites.includes(item.id) ? "heart" : "heart-o"} 
-                        size={20} 
-                        color={favorites.includes(item.id) ? "#f14a41" : "#bfbfbf"} 
-                    />
-
-                </TouchableOpacity>
-
-            </FirstLine>
-            
-            <TitleStacks>principais tecnologias</TitleStacks>
-
-            <ListDevStacks>
-                { renderStackDev(item.stack) }
-            </ListDevStacks>
-
-        </DevCard>
-    )
-
-    return(
-        <View style={{ flex: 1 }}>
-            
-            <FlatList
-                contentContainerStyle={styles.container}
-                data={data}
-                renderItem={({ item }) => _renderItem(item)}
-                keyExtractor={item => typeList + item.name + item.id}
-            />
-
-        </View>
-    )
+  return (
+    <View style={{ flex: 1 }}>
+      <FlatList
+        contentContainerStyle={styles.container}
+        data={apolloData.devs}
+        renderItem={({ item }) => _renderItem(item)}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
+  );
 }
