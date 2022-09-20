@@ -6,3 +6,9 @@ export const TopNavScreen = styled.View`
     align-items: center;
     padding: 10px 15px
 `
+
+export const TopLogo = styled.Image`
+    width: 80px; 
+    height: 25px; 
+    resize-mode: contain;       
+`
