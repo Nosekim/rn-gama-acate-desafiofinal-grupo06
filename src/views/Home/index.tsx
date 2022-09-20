@@ -1,117 +1,103 @@
-import { TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome5, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
+import { TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  FontAwesome5,
+  MaterialCommunityIcons,
+  Octicons,
+} from "@expo/vector-icons";
 
-import Devs from '../Devs';
-import Favorites from '../Favorites';
-import Profile from '../Profile';
+import Devs from "../Devs";
+import Favorites from "../Favorites";
+import Profile from "../Profile";
 
-import { TopNavScreen, TopLogo } from './styles';
+import { TopNavScreen, TopLogo } from "./styles";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 interface IIcon {
-    focused: boolean;
-    color: string;
+  focused: boolean;
+  color: string;
 }
 
 export default function Home() {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <TopNavScreen>
+        <TopLogo source={require("../../assets/logo-letters.png")} />
 
-    return(
-        <SafeAreaView style={{ flex: 1 }}>
+        <TouchableOpacity onPress={() => false} activeOpacity={0.3}>
+          <MaterialCommunityIcons name="bell" size={24} color="#5d5c5f" />
+        </TouchableOpacity>
+      </TopNavScreen>
 
-            <TopNavScreen>
+      <Navigator
+        initialRouteName="DevsList"
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: "#2ab2dd",
+          tabBarInactiveTintColor: "#b0b0b0",
+          tabBarLabelStyle: {
+            textTransform: "uppercase",
+          },
+          tabBarStyle: {
+            height: 55,
+            backgroundColor: "#343138",
+            borderTopLeftRadius: 12,
+            borderTopRightRadius: 12,
+            elevation: 6,
+            borderTopWidth: 0,
+          },
+          tabBarItemStyle: {
+            marginVertical: 5,
+          },
+        }}
+      >
+        <Screen
+          name="Devs"
+          component={Devs}
+          options={{
+            tabBarLabel: "devs",
+            tabBarIcon: ({ focused, color }: IIcon) => (
+              <MaterialCommunityIcons
+                name={focused ? "account-search" : "account-search-outline"}
+                size={30}
+                color={color}
+              />
+            ),
+          }}
+        />
 
-                <TopLogo 
-                    source={require('../../assets/logo-letters.png')} 
-                />
+        <Screen
+          name="Favorites"
+          component={Favorites}
+          options={{
+            tabBarLabel: "favoritos",
+            tabBarIcon: ({ focused, color }: IIcon) => (
+              <Octicons
+                name={focused ? "heart-fill" : "heart"}
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
 
-                <TouchableOpacity
-                    onPress={() => false}
-                    activeOpacity={.3}
-                >
-
-                    <MaterialCommunityIcons 
-                        name="bell" 
-                        size={24} 
-                        color="#5d5c5f" 
-                    />
-
-                </TouchableOpacity>
-
-            </TopNavScreen>
-
-            <Navigator
-                initialRouteName='DevsList'
-                screenOptions={{
-                    headerShown: false,
-                    tabBarActiveTintColor: '#2ab2dd',
-                    tabBarInactiveTintColor: '#b0b0b0',
-                    tabBarLabelStyle: { 
-                        textTransform: 'uppercase'
-                    },
-                    tabBarStyle: {
-                        height: 55,
-                        backgroundColor: '#343138',
-                        borderTopLeftRadius: 12,
-                        borderTopRightRadius: 12,
-                        elevation: 6,
-                        borderTopWidth: 0,
-                    },
-                    tabBarItemStyle: {
-                        marginVertical: 5
-                    }
-                }}
-            >
-            
-                <Screen 
-                    name='Devs'
-                    component={Devs}
-                    options={{
-                        tabBarLabel: 'devs',
-                        tabBarIcon: ({ focused, color }: IIcon) => (
-                            <MaterialCommunityIcons
-                                name={focused ? "account-search" : "account-search-outline"} 
-                                size={30} 
-                                color={color}
-                            />
-                        )  
-                    }}
-                />
-
-                <Screen 
-                    name='Favorites'
-                    component={Favorites}
-                    options={{
-                        tabBarLabel: 'favoritos',
-                        tabBarIcon: ({ focused, color }: IIcon) => (
-                            <Octicons
-                                name={focused ? "heart-fill" : "heart"}
-                                size={24} 
-                                color={color}
-                            />
-                        )
-                    }}
-                />    
-
-                <Screen 
-                    name='Profile'
-                    component={Profile}
-                    options={{
-                        tabBarLabel: 'perfil',
-                        tabBarIcon: ({ focused, color }: IIcon) => (
-                            <FontAwesome5
-                                name={focused ? "user-alt" : "user"}
-                                size={22} 
-                                color={color}
-                            />
-                        )
-                    }}
-                />    
-
-            </Navigator>
-
-        </SafeAreaView>
-    )
+        <Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: "perfil",
+            tabBarIcon: ({ focused, color }: IIcon) => (
+              <FontAwesome5
+                name={focused ? "user-alt" : "user"}
+                size={22}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Navigator>
+    </SafeAreaView>
+  );
 }
