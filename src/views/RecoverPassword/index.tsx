@@ -1,75 +1,58 @@
-import {
-    ContainerMain,
-    ContainerTextTop,
-    TextTop,
-    TextContent,
-    InputEmailAddress,
-    StyledButtons,
-    Containers,
-    TextButton
-} from './style';
-
+import { TouchableHighlight } from 'react-native';
+import { ContainerScreen, InputField, stylesActionButton, TextButton, TextContent } from '../../global/GlobalStyles';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { useState } from 'react';
-
-import {
-    AntDesign
-} from '@expo/vector-icons';
+import TopBarNav from '../../components/TopBarNav';
 
 const RecoverPassword = () => {
-    const [textInputValue, setTextInputValue] = useState('');
+
+    const [email, setEmail] = useState('');
 
     return (
-        <ContainerMain>
-            <ContainerTextTop>
-                <StyledButtons>
-                    <AntDesign
-                        name="left"
-                        size={24}
-                        color="rgba(255, 255, 255, 0.30)" />
-                </StyledButtons>
-                <StyledButtons>
-                    <TextTop>
-                        Recuperar Senha
-                    </TextTop>
-                </StyledButtons>
-            </ContainerTextTop>
-            <Containers>
+        <SafeAreaView style={{ flex: 1 }}>
+
+            <TopBarNav 
+                title="Recuperar Senha"
+            />
+
+            <ContainerScreen>
+
                 <TextContent>
                     Digite o e-mail que você utilizou para
                     cadastrar a sua conta
                 </TextContent>
-                <Containers>
-                    <InputEmailAddress
-                        onChangeText={setTextInputValue}
-                        value={textInputValue}
-                    />
-                    <StyledButtons>
-                        <LinearGradient
-                            style={{
-                                paddingVertical: 14,
-                                paddingHorizontal: 8,
-                                borderRadius: 8,
-                                shadowColor: "#2BC0E0",
-                                shadowOffset: {
-                                    width: 15,
-                                    height: 12,
-                                },
-                                shadowOpacity: 0.4,
-                                shadowRadius: 15,
-                                elevation: 10
-                            }}
-                            colors={['#2BC0E0', '#2382B8']}
-                        >
-                            <TextButton>
-                                Enviar
-                            </TextButton>
-                        </LinearGradient>
-                    </StyledButtons>
-                </Containers>
-            </Containers>
-        </ContainerMain >
+
+                <InputField
+                    style={{ marginTop: 15, marginBottom: 30 }} 
+                    value={email}
+                    keyboardType="email-address"
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    onChangeText={(text: string) => setEmail(text)}
+                    onSubmitEditing={() => false}
+                />
+
+                <LinearGradient
+                    colors={['#2BC0E0', '#2382B8']}
+                    style={stylesActionButton.container}
+                >
+
+                    <TouchableHighlight
+                        style={stylesActionButton.content}
+                        activeOpacity={.7}
+                        onPress={() => false}
+                        underlayColor='#2BC0E0'
+                    >
+                        <TextButton>Enviar</TextButton>
+                    </TouchableHighlight>
+
+                </LinearGradient>
+
+            </ContainerScreen>
+
+        </SafeAreaView>    
     )
 }
 

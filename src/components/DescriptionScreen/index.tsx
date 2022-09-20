@@ -1,5 +1,6 @@
 import { Image, ImageSourcePropType } from "react-native";
-import { ContainerDescription, TextDescription } from "./styles";
+
+import { ContainerScreen, TextContent } from "../../global/GlobalStyles";
 
 interface IDescriptionProps {
     image: ImageSourcePropType;
@@ -9,12 +10,12 @@ interface IDescriptionProps {
 export default function DescriptionScreen({ image, text }: IDescriptionProps) {
 
     return(
-        <ContainerDescription>
+        <ContainerScreen>
 
             <Image source={image} />
 
-            <TextDescription>{ text }</TextDescription>
+            <TextContent>{ text }</TextContent>
 
-        </ContainerDescription>
+        </ContainerScreen>
     )
 }
