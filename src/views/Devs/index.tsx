@@ -31,14 +31,19 @@ export default function Devs() {
             dispatch(changeLoadingStatus(true));
         }
             
-    }, [dispatch, listCategories, listStacks, listStates, listDevs, changeLoadingStatus])
+    }, [])
 
     useEffect(() => {
 
         if(categories.length > 0 && stacks.length > 0 && states.length > 0 && devsList.length > 0)
             dispatch(changeLoadingStatus(false));    
 
-    }, [loadingData, dispatch, changeLoadingStatus])
+    }, [categories, stacks, states, devsList])
 
-    return <DevsList data={devsList} />
+    return(
+        <DevsList 
+            data={devsList} 
+            typeList="devs"
+        />
+    )    
 }

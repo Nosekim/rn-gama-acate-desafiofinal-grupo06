@@ -1,10 +1,11 @@
 import { ScrollView, View } from 'react-native';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder'
 import { LinearGradient } from 'expo-linear-gradient';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { heightScreen } from "../../global/GlobalStyles";
 
-import styles, { DevCard, FirstLine, ListDevStacks, MainData, TitleStacks } from "../DevsList/styles";
+import styles, { DevCard, FirstLine, ListDevStacks, MainData, TitleStacks } from "./styles";
 
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
@@ -39,7 +40,11 @@ export default function LoadingDevsList() {
 
                             </MainData>
 
-                            <ShimmerPlaceholder style={{ width: 20, height: 20 }} />
+                            <FontAwesome 
+                                name="heart-o"
+                                size={20} 
+                                color="#bfbfbf"
+                            />
 
                         </FirstLine>    
 

@@ -13,7 +13,12 @@ export default function Favorites() {
 
         const favoritesDevs = devsList.filter(item => favorites.includes(item.id));
         
-        return <DevsList data={favoritesDevs} />
+        return(
+            <DevsList 
+                data={favoritesDevs} 
+                typeList="favorites"
+            />
+        )    
     }
 
     return(

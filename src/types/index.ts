@@ -1,3 +1,11 @@
+export interface IAuth {
+    isLoggedIn: boolean;
+    loginMethod: string;
+    email: string;
+    password: string;
+    showPassword: boolean;
+}
+
 export interface ICategory {
     id: number;
     name: string;
@@ -50,6 +58,10 @@ export interface ILoadingData {
 export interface IAppState {
     auth: {
         isLoggedIn: boolean;
+        loginMethod: string;
+        email: string;
+        password: string;
+        showPassword: boolean;
     },
     devs: {
         categories: ICategory[];

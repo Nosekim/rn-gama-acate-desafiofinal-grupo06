@@ -1,16 +1,19 @@
 import { Text, TouchableOpacity  } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
 interface LinkProps {
     textLink: string;
+    screenTarget: string;
 }
 
-export default function Link({ textLink }: LinkProps) {
+export default function Link({ textLink, screenTarget }: LinkProps) {
+
+    const nav = useNavigation();
 
     return(
         <TouchableOpacity
             style={{ marginTop: 10, height: 48, paddingHorizontal: 8, justifyContent: 'center' }}
-            onPress={() => false}
+            onPress={() => nav.navigate(screenTarget)}
             activeOpacity={.7}
         >
 

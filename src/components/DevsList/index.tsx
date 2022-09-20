@@ -8,13 +8,14 @@ import { IDev, IAppState } from "../../types";
 
 import styles, { CategoryDev, DevCard, FirstLine, ListDevStacks, MainData, NameDev, StackPill, TitleStacks } from "./styles";
 
-import LoadingDevsList from "../LoadingDevsList";
+import LoadingDevsList from "./loading";
 
 interface IDevsList {
     data: IDev[];
+    typeList: string;
 }
 
-export default function DevsList({ data }: IDevsList) {
+export default function DevsList({ data, typeList }: IDevsList) {
 
     const dispatch = useDispatch();
  
@@ -104,7 +105,7 @@ export default function DevsList({ data }: IDevsList) {
                 contentContainerStyle={styles.container}
                 data={data}
                 renderItem={({ item }) => _renderItem(item)}
-                keyExtractor={item => item.id + item.name}
+                keyExtractor={item => typeList + item.name + item.id}
             />
 
         </View>

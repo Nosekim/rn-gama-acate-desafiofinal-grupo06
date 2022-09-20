@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
@@ -7,9 +7,14 @@ import Devs from '../Devs';
 import Favorites from '../Favorites';
 import Profile from '../Profile';
 
-import { TopNavScreen } from './styles';
+import { TopNavScreen, TopLogo } from './styles';
 
 const { Navigator, Screen } = createBottomTabNavigator();
+
+interface IIcon {
+    focused: boolean;
+    color: string;
+}
 
 export default function Home() {
 
@@ -18,7 +23,9 @@ export default function Home() {
 
             <TopNavScreen>
 
-                <Image source={require('../../assets/logo-letters.png')} />
+                <TopLogo 
+                    source={require('../../assets/logo-letters.png')} 
+                />
 
                 <TouchableOpacity
                     onPress={() => false}
@@ -63,7 +70,7 @@ export default function Home() {
                     component={Devs}
                     options={{
                         tabBarLabel: 'devs',
-                        tabBarIcon: ({ focused, color }) => (
+                        tabBarIcon: ({ focused, color }: IIcon) => (
                             <MaterialCommunityIcons
                                 name={focused ? "account-search" : "account-search-outline"} 
                                 size={30} 
@@ -78,7 +85,7 @@ export default function Home() {
                     component={Favorites}
                     options={{
                         tabBarLabel: 'favoritos',
-                        tabBarIcon: ({ focused, color }) => (
+                        tabBarIcon: ({ focused, color }: IIcon) => (
                             <Octicons
                                 name={focused ? "heart-fill" : "heart"}
                                 size={24} 
@@ -93,7 +100,7 @@ export default function Home() {
                     component={Profile}
                     options={{
                         tabBarLabel: 'perfil',
-                        tabBarIcon: ({ focused, color }) => (
+                        tabBarIcon: ({ focused, color }: IIcon) => (
                             <FontAwesome5
                                 name={focused ? "user-alt" : "user"}
                                 size={22} 

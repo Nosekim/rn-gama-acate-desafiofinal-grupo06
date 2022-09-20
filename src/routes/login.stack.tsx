@@ -3,20 +3,35 @@ import GetStarted from "../views/GetStarted";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 import RecoverPassword from "../views/RecoverPassword";
+import Login from "../views/Login";
+import Register from "../views/Register";
 
 function LoginStack() {
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{ headerShown: false }}
+    >
+
         <Screen 
           name="GetStarted" 
           component={GetStarted} 
-          options={{ headerShown: false }}
         />
 
         <Screen 
-          name="Recuperação de Senha" 
+          name="Login" 
+          component={Login} 
+        />
+
+        <Screen 
+          name="Recuperar Senha" 
           component={RecoverPassword} 
         />
+
+        <Screen 
+          name="Cadastro" 
+          component={Register} 
+        />
+
     </Navigator>
   );
 }
