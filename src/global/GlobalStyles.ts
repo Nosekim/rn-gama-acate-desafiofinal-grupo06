@@ -24,7 +24,7 @@ export const InputField = styled.TextInput.attrs({
     width: 100%;
     background-color: #36323D;
     height: 48px;
-    color: #ffffff;
+    color: #fff;
     font-size: 16px;
     font-weight: bold;
     border: 1px solid #4B4751;

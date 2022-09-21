@@ -4,6 +4,11 @@ export interface IAuth {
   email: string;
   password: string;
   showPassword: boolean;
+  name: string;
+  category: string;
+  stacks: string[];
+  state: string;
+  description: string;
 }
 
 export interface ICategory {
@@ -66,6 +71,11 @@ export interface ILoadingData {
   loadingData: boolean;
 }
 
+export interface IInfoProcess {
+  showError: boolean;
+  msgError: string;
+}
+
 export interface IAppState {
   auth: {
     isLoggedIn: boolean;
@@ -73,6 +83,11 @@ export interface IAppState {
     email: string;
     password: string;
     showPassword: boolean;
+    name: string;
+    category: string;
+    stacks: string[];
+    state: string;
+    description: string;
   };
   devs: {
     categories: ICategory[];
@@ -82,4 +97,8 @@ export interface IAppState {
     favorites: number[];
     loadingData: boolean;
   };
+  info: {
+    showError: boolean;
+    msgError: string;
+  }
 }

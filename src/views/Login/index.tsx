@@ -1,4 +1,6 @@
 import { View, Image, TouchableHighlight } from 'react-native';
+import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { ContainerScreen, InputField, stylesActionButton, TextButton } from '../../global/GlobalStyles';
 import styles, { FormLogin, ContainerLink, SocialButton } from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,19 +10,57 @@ import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Link from '../../components/Link';
 import ShowPassword from '../../components/ShowPassword';
+import ProcessingAction from '../../components/ProcessingAction';
+import ShowError from '../../components/ShowError';
 
 import { IAppState } from '../../types';
 
 import { changeEmail, changePassword } from '../../store/modules/auth/reducer';
+import { changeMsgError, changeStatusError } from '../../store/modules/info/reducer';
+
+import { signIn } from '../../helpers/SignIn';
 
 export default function Login() {
 
     const dispatch = useDispatch();
 
+    const nav = useNavigation();
+
+    const [processing, setProcessing] = useState(false);
+
     const { email, password, showPassword } = useSelector((state: IAppState) => state.auth);
+
+    const { showError } = useSelector((state: IAppState) => state.info);
+
+    useEffect(() => {
+        setProcessing(false);
+    }, [showError])
+
+    const access = () => {
+
+        if(email !== "" && password.length >= 8) {
+
+            setProcessing(true);
+
+            signIn({ email, password, dispatch, nav });
+
+        } else {
+            
+            dispatch(changeMsgError("Por favor, preencha todos os campos"));
+
+            setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
+        }
+    }
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
+
+            <ProcessingAction 
+                text="Autenticando sua conta..."
+                visible={processing}
+            />
+
+            <ShowError />
 
             <ContainerScreen style={{ justifyContent: 'flex-start', marginTop: 60 }}>
 
@@ -82,7 +122,7 @@ export default function Login() {
                         <TouchableHighlight
                             style={stylesActionButton.content}
                             activeOpacity={.7}
-                            onPress={() => false}
+                            onPress={() => access()}
                             underlayColor='#2BC0E0'
                         >
                             <TextButton>Entrar</TextButton>

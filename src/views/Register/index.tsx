@@ -1,46 +1,99 @@
-import { View, TouchableHighlight } from 'react-native';
+import { TouchableHighlight } from 'react-native';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Auth } from 'aws-amplify';
 
 import { ContainerScreen, InputField, stylesActionButton, TextButton, TextContent, Label } from '../../global/GlobalStyles';
 import TopBarNav from '../../components/TopBarNav';
 import ShowPassword from '../../components/ShowPassword';
 import { InputGroup } from './styles';
+import ProcessingAction from '../../components/ProcessingAction';
+import ShowError from '../../components/ShowError';
 
 import { IAppState } from '../../types';
 
-interface IData {
-    name: string;
-    email: string;
-    password: string;
-}
+import { changeMsgError, changeStatusError } from '../../store/modules/info/reducer';
 
 export default function Register() {
 
-    const [data, setData] = useState<IData>({
-        name: '', email: '', password: ''
-    })
+    const dispatch = useDispatch();
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [processing, setProcessing] = useState(false);
 
     const { showPassword } = useSelector((state: IAppState) => state.auth);
 
+    const signUp = async() => {
+
+        try {
+
+            const { user } = await Auth.signUp({
+                username: email,
+                password,
+                attributes: {
+                    email,   
+                    name
+                },
+                autoSignIn: { 
+                    enabled: true
+                }
+            });
+
+            //console.log("user", user);
+
+        } catch (error) {
+            showMsgError("Ocorreu um erro na tentativa de criarmos sua conta");
+            //console.log('error signing up:', error);
+        }
+    }
+
+    const showMsgError = (text: string) => {
+
+        dispatch(changeMsgError(text));
+
+        setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
+    }
+
+    const createAccount = () => {
+
+        if(name !== "" && email !== "" && password !== "") {
+
+            setProcessing(true);
+
+            signUp();
+
+        } else {
+            showMsgError("Por favor, preencha todos os campos")
+        }
+    }
+
     return(
         <SafeAreaView style={{ flex: 1 }}>
+
+            <ProcessingAction 
+                text="Criando sua conta..."
+                visible={processing}
+            />
+
+            <ShowError />
 
             <TopBarNav 
                 title="Cadastro"
             />
 
-            <ContainerScreen>
+            <ContainerScreen style={{ justifyContent: 'flex-start', marginTop: 30 }}>
 
                 <InputGroup>
                 
                     <Label>Nome</Label>
 
                     <InputField 
-                        value={data.name}
-                        onChangeText={(text: string) => false}
+                        value={name}
+                        onChangeText={(text: string) => setName(text)}
                         onSubmitEditing={() => false}
                     />
                 
@@ -51,11 +104,11 @@ export default function Register() {
                     <Label>E-mail</Label>
 
                     <InputField 
-                        value={data.email}
+                        value={email}
                         keyboardType="email-address"
                         autoCapitalize='none'
                         autoCorrect={false}
-                        onChangeText={(text: string) => false}
+                        onChangeText={(text: string) => setEmail(text)}
                         onSubmitEditing={() => false}
                     />
                 
@@ -66,11 +119,11 @@ export default function Register() {
                     <Label>Senha</Label>
 
                     <InputField 
-                        value={data.password}
+                        value={password}
                         secureTextEntry={!showPassword}
                         autoCapitalize='none'
                         autoCorrect={false}
-                        onChangeText={(text: string) => false}
+                        onChangeText={(text: string) => setPassword(text)}
                         onSubmitEditing={() => false}
                     />
 
@@ -86,7 +139,7 @@ export default function Register() {
                     <TouchableHighlight
                         style={stylesActionButton.content}
                         activeOpacity={.7}
-                        onPress={() => false}
+                        onPress={() => createAccount()}
                         underlayColor='#2BC0E0'
                     >
                         <TextButton>Cadastrar Conta</TextButton>
