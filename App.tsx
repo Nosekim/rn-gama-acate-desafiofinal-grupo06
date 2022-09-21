@@ -1,8 +1,12 @@
 import RootRoutes from "./src/routes";
 import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
+import { Amplify, Auth } from 'aws-amplify';
+import awsconfig from './src/aws-exports';
 
 import store from "./src/store";
+
+Amplify.configure(awsconfig);
 
 function App() {
 
