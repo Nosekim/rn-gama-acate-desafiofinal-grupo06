@@ -4,6 +4,8 @@ import GetStarted from "../views/GetStarted";
 const { Navigator, Screen } = createNativeStackNavigator();
 
 import RecoverPassword from "../views/RecoverPassword";
+
+import ViewProfile from "../views/ViewProfile";
 import Login from "../views/Login";
 import Register from "../views/Register";
 import Terms from "../views/Terms";
@@ -56,7 +58,12 @@ function LoginStack() {
           name="Política de Privacidade" 
           component={PrivacyPolicy} 
         />
-
+        
+        <Screen
+          name="Perfil do Dev"
+          options={{ headerShown: false }}
+          component={ViewProfile}
+        />
     </Navigator>
   );
 }
