@@ -16,7 +16,7 @@ export default function ProfilePicture({ image }: IPicture) {
     }
 
     return(
-        <FramePicture>
+        <FramePicture style={{ elevation: 3 }}>
 
             { showPhoto() }
 

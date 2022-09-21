@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuth } from "../../../types";
 
 const initialState = {
-  isLoggedIn: true,
+  isLoggedIn: false,
   loginMethod: "",
   email: "",
   password: "",
