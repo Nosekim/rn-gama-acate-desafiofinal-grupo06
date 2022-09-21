@@ -4,7 +4,8 @@ import { IInfoProcess } from "../../../types";
 
 const initialState = {
   showError: false,
-  msgError: ""
+  msgError: "",
+  processingAction: false
 };
 
 const InfoReducer = createSlice({
@@ -16,11 +17,16 @@ const InfoReducer = createSlice({
     },
     changeMsgError: (state: IInfoProcess, action: PayloadAction<string>) => {
         state.msgError = action.payload;
-      },
+    },
+    changeProcessingAction: (state: IInfoProcess, action: PayloadAction<boolean>) => {
+      state.processingAction = action.payload;
+    },
   },
 });
 
-export const { changeStatusError, changeMsgError } =
-  InfoReducer.actions;
+export const { 
+  changeStatusError, 
+  changeMsgError,
+  changeProcessingAction } = InfoReducer.actions;
 
 export default InfoReducer.reducer;

@@ -4,11 +4,7 @@ export interface IAuth {
   email: string;
   password: string;
   showPassword: boolean;
-  name: string;
-  category: string;
-  stacks: string[];
-  state: string;
-  description: string;
+  recoveringPassword: boolean;
 }
 
 export interface ICategory {
@@ -74,6 +70,17 @@ export interface ILoadingData {
 export interface IInfoProcess {
   showError: boolean;
   msgError: string;
+  processingAction: boolean;
+}
+
+export interface IUserProfile {
+  idUser: string;
+  name: string;
+  photoUser: string;
+  category: string;
+  stacks: string[];
+  state: string;
+  description: string;
 }
 
 export interface IAppState {
@@ -83,11 +90,7 @@ export interface IAppState {
     email: string;
     password: string;
     showPassword: boolean;
-    name: string;
-    category: string;
-    stacks: string[];
-    state: string;
-    description: string;
+    recoveringPassword: boolean;
   };
   devs: {
     categories: ICategory[];
@@ -100,5 +103,15 @@ export interface IAppState {
   info: {
     showError: boolean;
     msgError: string;
+    processingAction: boolean;
+  };
+  user: {
+    idUser: string;
+    name: string;
+    photoUser: string;
+    category: string;
+    stacks: string[];
+    state: string;
+    description: string;
   }
 }

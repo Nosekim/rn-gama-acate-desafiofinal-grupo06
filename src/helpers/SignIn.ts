@@ -1,12 +1,13 @@
 import { Auth } from 'aws-amplify';
 
 import { 
-    changeIsLoggedIn,
-    changeLoginMethod, 
-    changeName 
-} from '../store/modules/auth/reducer';
+    changeIsLoggedIn, 
+    changeLoginMethod,
+    changeRecoveringPassword } from '../store/modules/auth/reducer';
 
-import { changeMsgError, changeStatusError } from '../store/modules/info/reducer';
+import { changeIdUser, changeName } from '../store/modules/userProfile/reducer';
+
+import { changeMsgError, changeStatusError, changeProcessingAction } from '../store/modules/info/reducer';
 
 interface ISignIn {
     email: string;
@@ -18,21 +19,40 @@ interface ISignIn {
 export async function signIn({ email, password, dispatch, nav }: ISignIn) {
     try {
 
+        dispatch(changeProcessingAction(true));
+
         const user = await Auth.signIn(email, password);
 
         if(user) {
 
-            console.log("user", user);
+            dispatch(changeIdUser(user.username));
+            dispatch(changeName(user.attributes.name));
 
-            dispatch(changeIsLoggedIn(true));
             dispatch(changeLoginMethod("email"));
+
+            setTimeout(() => { dispatch(changeIsLoggedIn(true)) }, 50);
         }
 
-    } catch (error) {
-        console.log('error signing in', error);
+    } catch (error: any) {
 
-        dispatch(changeMsgError("Ocorreu um erro na tentativa de acessar sua conta. Por favor, tente novamente"));
+        if(error.name === "UserNotConfirmedException") {
 
-        setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
+            dispatch(changeRecoveringPassword(false));
+            nav.navigate("Verificação de Conta");
+
+        } else {
+            
+            let textError = "Erro no acesso! Por favor, verifique os dados informados e tente novamente";
+
+            if(error.name === "LimitExceededException")
+                textError = "Limite de tentativas excedido! Por favor, tente novamente mais tarde";
+
+            dispatch(changeMsgError(textError));
+
+            setTimeout(() => { 
+                dispatch(changeProcessingAction(false));
+                dispatch(changeStatusError(true)) 
+            }, 20);
+        }
     }
 }

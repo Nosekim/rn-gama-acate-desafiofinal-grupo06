@@ -8,6 +8,7 @@ export const ModalFrame = styled.TouchableOpacity`
 `
 
 export const ModalBody = styled.View`
+    margin: 0 15px;
     padding: 15px;
     border-radius: 12px;
     background-color: #424143;

@@ -3,16 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuth } from "../../../types";
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: true,
   loginMethod: "",
   email: "",
   password: "",
   showPassword: false,
-  name: "",
-  category: "",
-  stacks: [],
-  state: "",
-  description: ""
+  recoveringPassword: false
 };
 
 const AuthReducer = createSlice({
@@ -34,8 +30,8 @@ const AuthReducer = createSlice({
     changeLoginMethod: (state: IAuth, action: PayloadAction<string>) => {
       state.loginMethod = action.payload;
     },
-    changeName: (state: IAuth, action: PayloadAction<string>) => {
-      state.name = action.payload;
+    changeRecoveringPassword: (state: IAuth, action: PayloadAction<boolean>) => {
+      state.recoveringPassword = action.payload;
     },
   },
 });
@@ -46,6 +42,6 @@ export const {
   changeShowPassword, 
   changeIsLoggedIn,
   changeLoginMethod, 
-  changeName } = AuthReducer.actions;
+  changeRecoveringPassword } = AuthReducer.actions;
 
 export default AuthReducer.reducer;

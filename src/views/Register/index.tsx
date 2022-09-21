@@ -1,82 +1,71 @@
-import { TouchableHighlight } from 'react-native';
-import { useState } from 'react';
+import { ScrollView, TouchableHighlight, Text } from 'react-native';
+import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Auth } from 'aws-amplify';
+import { useNavigation } from '@react-navigation/native';
 
-import { ContainerScreen, InputField, stylesActionButton, TextButton, TextContent, Label } from '../../global/GlobalStyles';
+import { 
+    ContainerScreen, 
+    InputField, 
+    stylesActionButton, 
+    TextButton, 
+    TextContent, 
+    Label, 
+    InputGroup } from '../../global/GlobalStyles';
+
 import TopBarNav from '../../components/TopBarNav';
 import ShowPassword from '../../components/ShowPassword';
-import { InputGroup } from './styles';
 import ProcessingAction from '../../components/ProcessingAction';
 import ShowError from '../../components/ShowError';
 
 import { IAppState } from '../../types';
 
-import { changeMsgError, changeStatusError } from '../../store/modules/info/reducer';
+import { signUp } from '../../helpers/SignUp';
+import { validateEmail } from '../../utils';
+
+import { 
+    changeMsgError, 
+    changeStatusError,
+    changeProcessingAction } from '../../store/modules/info/reducer';
 
 export default function Register() {
 
     const dispatch = useDispatch();
 
+    const nav = useNavigation();
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [processing, setProcessing] = useState(false);
 
     const { showPassword } = useSelector((state: IAppState) => state.auth);
 
-    const signUp = async() => {
-
-        try {
-
-            const { user } = await Auth.signUp({
-                username: email,
-                password,
-                attributes: {
-                    email,   
-                    name
-                },
-                autoSignIn: { 
-                    enabled: true
-                }
-            });
-
-            //console.log("user", user);
-
-        } catch (error) {
-            showMsgError("Ocorreu um erro na tentativa de criarmos sua conta");
-            //console.log('error signing up:', error);
-        }
-    }
-
-    const showMsgError = (text: string) => {
-
-        dispatch(changeMsgError(text));
-
-        setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
-    }
+    useEffect(() => {
+        dispatch(changeProcessingAction(false));
+    }, [])
 
     const createAccount = () => {
 
-        if(name !== "" && email !== "" && password !== "") {
+        if(name !== "" && validateEmail(email) && password.length >= 8) {
 
-            setProcessing(true);
-
-            signUp();
+            signUp({ name, email, password, dispatch, nav });
 
         } else {
-            showMsgError("Por favor, preencha todos os campos")
+
+            dispatch(changeMsgError("Por favor, preencha corretamente todos os campos"));
+
+            setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
         }
     }
+
+    const link = (text: string) => <Text style={{ color: '#1ea9c8' }} onPress={() => nav.navigate(text)}>{ text }</Text>
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
 
             <ProcessingAction 
                 text="Criando sua conta..."
-                visible={processing}
             />
 
             <ShowError />
@@ -85,7 +74,9 @@ export default function Register() {
                 title="Cadastro"
             />
 
-            <ContainerScreen style={{ justifyContent: 'flex-start', marginTop: 30 }}>
+            <ContainerScreen>
+
+                <TextContent style={{ marginBottom: 15 }}>Forneça seu nome, e-mail e uma senha com no mínimo 8 caracteres</TextContent>
 
                 <InputGroup>
                 
@@ -147,7 +138,7 @@ export default function Register() {
 
                 </LinearGradient>
 
-                <TextContent>Ao se cadastrar, você concorda com nossos Termos de Uso e Política de Privacidade</TextContent>
+                <TextContent>Ao se cadastrar, você concorda com nossos { link("Termos de Uso") } e { link("Política de Privacidade") }</TextContent>
 
             </ContainerScreen>
 

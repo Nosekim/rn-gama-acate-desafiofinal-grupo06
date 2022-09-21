@@ -1,8 +1,7 @@
-import { TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 
-import { TopBar, TitleBar } from './styles';
+import { TopBar, BackButton, TitleBar } from './styles';
 
 interface ITopBar {
     title: string;
@@ -15,7 +14,7 @@ export default function TopBarNav({ title }: ITopBar) {
     return(
         <TopBar>
 
-            <TouchableOpacity
+            <BackButton
                 onPress={() => nav.goBack()}
                 activeOpacity={.5}
             >
@@ -26,7 +25,7 @@ export default function TopBarNav({ title }: ITopBar) {
                     color="rgba(255, 255, 255, .3)" 
                 />
 
-            </TouchableOpacity>
+            </BackButton>
 
             <TitleBar>{ title }</TitleBar>
 

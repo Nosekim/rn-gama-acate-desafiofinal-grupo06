@@ -1,12 +1,18 @@
 import { View, Image, TouchableHighlight } from 'react-native';
-import { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { ContainerScreen, InputField, stylesActionButton, TextButton } from '../../global/GlobalStyles';
-import styles, { FormLogin, ContainerLink, SocialButton } from './styles';
+import { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+import { 
+    ContainerScreen, 
+    InputField, 
+    stylesActionButton, 
+    TextButton, 
+    ContainerLink, } from '../../global/GlobalStyles';
+import styles, { FormLogin, SocialButton } from './styles';
 
 import Link from '../../components/Link';
 import ShowPassword from '../../components/ShowPassword';
@@ -16,9 +22,13 @@ import ShowError from '../../components/ShowError';
 import { IAppState } from '../../types';
 
 import { changeEmail, changePassword } from '../../store/modules/auth/reducer';
-import { changeMsgError, changeStatusError } from '../../store/modules/info/reducer';
+import { 
+    changeMsgError, 
+    changeStatusError,
+    changeProcessingAction } from '../../store/modules/info/reducer';
 
 import { signIn } from '../../helpers/SignIn';
+import { validateEmail } from '../../utils';
 
 export default function Login() {
 
@@ -26,24 +36,16 @@ export default function Login() {
 
     const nav = useNavigation();
 
-    const [processing, setProcessing] = useState(false);
-
     const { email, password, showPassword } = useSelector((state: IAppState) => state.auth);
 
-    const { showError } = useSelector((state: IAppState) => state.info);
-
     useEffect(() => {
-        setProcessing(false);
-    }, [showError])
+        dispatch(changeProcessingAction(false));
+    }, [])
 
     const access = () => {
 
-        if(email !== "" && password.length >= 8) {
-
-            setProcessing(true);
-
+        if(validateEmail(email) && password.length >= 8) {
             signIn({ email, password, dispatch, nav });
-
         } else {
             
             dispatch(changeMsgError("Por favor, preencha todos os campos"));
@@ -57,12 +59,11 @@ export default function Login() {
 
             <ProcessingAction 
                 text="Autenticando sua conta..."
-                visible={processing}
             />
 
             <ShowError />
 
-            <ContainerScreen style={{ justifyContent: 'flex-start', marginTop: 60 }}>
+            <ContainerScreen>
 
                 <Image source={require('../../assets/logo-letters.png')} />
 
@@ -141,7 +142,7 @@ export default function Login() {
 
                 </FormLogin>
 
-                <LinearGradient
+                {/*<LinearGradient
                     colors={['#2BC0E0', '#2382B8']}
                     style={styles.divBar}
                 />
@@ -177,7 +178,7 @@ export default function Login() {
 
                     <TextButton>Entrar com Github</TextButton>   
 
-                </SocialButton>
+    </SocialButton>*/}
 
             </ContainerScreen>
 

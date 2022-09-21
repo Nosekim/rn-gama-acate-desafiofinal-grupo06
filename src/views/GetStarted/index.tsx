@@ -18,6 +18,20 @@ const RouteSearch = () => (
     />
 )
 
+const RouteFavorite = () => (
+    <DescriptionScreen 
+        image={require('../../assets/ilustrations/favorites.png')}
+        text='Favorite os desenvolvedores que você mais gostar do perfil'
+    />
+)
+
+const RouteContact = () => (
+    <DescriptionScreen 
+        image={require('../../assets/ilustrations/team.png')}
+        text='Convide os desenvolvedores para participar do seu projeto ou da sua equipe'
+    />
+)
+
 export default function GetStarted() {
 
     const nav = useNavigation();
@@ -31,8 +45,8 @@ export default function GetStarted() {
 
     const renderScene = SceneMap({
         first: RouteSearch,
-        second: RouteSearch,
-        third: RouteSearch
+        second: RouteFavorite,
+        third: RouteContact
     })
 
     const renderIndicators = (props: any) => (
