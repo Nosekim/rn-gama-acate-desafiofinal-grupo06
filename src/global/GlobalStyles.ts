@@ -24,7 +24,7 @@ export const InputField = styled.TextInput.attrs({
     width: 100%;
     background-color: #36323D;
     height: 48px;
-    color: #ffffff;
+    color: #fff;
     font-size: 16px;
     font-weight: bold;
     border: 1px solid #4B4751;
@@ -32,10 +32,20 @@ export const InputField = styled.TextInput.attrs({
     padding-left: 15px;
 `
 
+export const InputGroup = styled.View`
+    width: 100%;
+    margin-bottom: 25px;
+`
+
 export const TextButton = styled.Text`
     font-size: 14px; 
     font-weight: bold;
     color: #fff;
+`
+export const ContainerLink = styled.View`
+    width: 100%;
+    align-items: center;
+    padding: 5px 0;
 `
 
 export const Label = styled.Text`

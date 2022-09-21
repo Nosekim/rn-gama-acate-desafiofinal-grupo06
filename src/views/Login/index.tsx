@@ -1,28 +1,69 @@
 import { View, Image, TouchableHighlight } from 'react-native';
-import { ContainerScreen, InputField, stylesActionButton, TextButton } from '../../global/GlobalStyles';
-import styles, { FormLogin, ContainerLink, SocialButton } from './styles';
+import { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
+import { 
+    ContainerScreen, 
+    InputField, 
+    stylesActionButton, 
+    TextButton, 
+    ContainerLink, } from '../../global/GlobalStyles';
+import styles, { FormLogin, SocialButton } from './styles';
 
 import Link from '../../components/Link';
 import ShowPassword from '../../components/ShowPassword';
+import ProcessingAction from '../../components/ProcessingAction';
+import ShowError from '../../components/ShowError';
 
 import { IAppState } from '../../types';
 
 import { changeEmail, changePassword } from '../../store/modules/auth/reducer';
+import { 
+    changeMsgError, 
+    changeStatusError,
+    changeProcessingAction } from '../../store/modules/info/reducer';
+
+import { signIn } from '../../helpers/SignIn';
+import { validateEmail } from '../../utils';
 
 export default function Login() {
 
     const dispatch = useDispatch();
 
+    const nav = useNavigation();
+
     const { email, password, showPassword } = useSelector((state: IAppState) => state.auth);
+
+    useEffect(() => {
+        dispatch(changeProcessingAction(false));
+    }, [])
+
+    const access = () => {
+
+        if(validateEmail(email) && password.length >= 8) {
+            signIn({ email, password, dispatch, nav });
+        } else {
+            
+            dispatch(changeMsgError("Por favor, preencha todos os campos"));
+
+            setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
+        }
+    }
 
     return(
         <SafeAreaView style={{ flex: 1 }}>
 
-            <ContainerScreen style={{ justifyContent: 'flex-start', marginTop: 60 }}>
+            <ProcessingAction 
+                text="Autenticando sua conta..."
+            />
+
+            <ShowError />
+
+            <ContainerScreen>
 
                 <Image source={require('../../assets/logo-letters.png')} />
 
@@ -82,7 +123,7 @@ export default function Login() {
                         <TouchableHighlight
                             style={stylesActionButton.content}
                             activeOpacity={.7}
-                            onPress={() => false}
+                            onPress={() => access()}
                             underlayColor='#2BC0E0'
                         >
                             <TextButton>Entrar</TextButton>
@@ -101,7 +142,7 @@ export default function Login() {
 
                 </FormLogin>
 
-                <LinearGradient
+                {/*<LinearGradient
                     colors={['#2BC0E0', '#2382B8']}
                     style={styles.divBar}
                 />
@@ -137,7 +178,7 @@ export default function Login() {
 
                     <TextButton>Entrar com Github</TextButton>   
 
-                </SocialButton>
+    </SocialButton>*/}
 
             </ContainerScreen>
 

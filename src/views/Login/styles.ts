@@ -7,12 +7,6 @@ export const FormLogin = styled.View`
     margin-bottom: 15px;
 `
 
-export const ContainerLink = styled.View`
-    width: 100%;
-    align-items: center;
-    padding: 5px 0;
-`
-
 export const SocialButton = styled.TouchableOpacity`
     width: 100%;
     height: 48px;

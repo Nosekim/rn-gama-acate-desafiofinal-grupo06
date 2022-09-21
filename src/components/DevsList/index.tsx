@@ -20,38 +20,17 @@ import styles, {
   TitleStacks,
 } from "./styles";
 
-import LoadingDevsList from "./loading";
-
 interface IDevsList {
-  data: IDev[];
+  data: any;
   typeList: string;
-  apolloData: any;
 }
 
-export default function DevsList({ data, typeList, apolloData }: IDevsList) {
+export default function DevsList({ data, typeList }: IDevsList) {
   const dispatch = useDispatch();
 
-  const { categories, stacks, favorites, loadingData } = useSelector(
+  const { favorites } = useSelector(
     (state: IAppState) => state.devs
   );
-
-  if (loadingData) return <LoadingDevsList />;
-
-  const renderCategoryDev = (id: number) => {
-    const category = categories.find((item) => item.id === id);
-
-    if (category) return <CategoryDev>{category.name}</CategoryDev>;
-
-    return false;
-  };
-
-  const renderStackDev = (id: number) => {
-    const stack = stacks.find((item) => item.id === id);
-
-    if (stack) return <StackPill>{stack.label}</StackPill>;
-
-    return false;
-  };
 
   const manageFavorites = (id: number) => {
     if (favorites.includes(id)) dispatch(removeFavorite(id));
@@ -89,7 +68,7 @@ export default function DevsList({ data, typeList, apolloData }: IDevsList) {
 
       <ListDevStacks>
         {item.stack.map((s) => (
-          <StackPill>{s.name}</StackPill>
+          <StackPill key={`${item.id}${s.name}`}>{s.name}</StackPill>
         ))}
       </ListDevStacks>
     </DevCard>
@@ -99,9 +78,9 @@ export default function DevsList({ data, typeList, apolloData }: IDevsList) {
     <View style={{ flex: 1 }}>
       <FlatList
         contentContainerStyle={styles.container}
-        data={apolloData.devs}
+        data={data}
         renderItem={({ item }) => _renderItem(item)}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => typeList + item.name + item.id}
       />
     </View>
   );

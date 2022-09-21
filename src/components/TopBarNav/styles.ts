@@ -8,9 +8,14 @@ export const TopBar = styled.View`
     padding: 0 15px;
 `
 
+export const BackButton = styled.TouchableOpacity`
+    justify-content: center;
+    height: 40px; 
+    width: 40px;
+`
+
 export const TitleBar = styled.Text`
     color: #FBFBFE;
-    fontWeight: bold;
-    fontSize: 14px;
-    margin-left: 15px;
+    font-weight: bold;
+    font-size: 14px;
 `

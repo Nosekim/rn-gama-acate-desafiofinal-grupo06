@@ -1,6 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useNavigation } from "@react-navigation/native";
 import {
   FontAwesome5,
   MaterialCommunityIcons,
@@ -9,7 +10,7 @@ import {
 
 import Devs from "../Devs";
 import Favorites from "../Favorites";
-import Profile from "../Profile";
+import UserProfile from "../UserProfile";
 
 import { TopNavScreen, TopLogo } from "./styles";
 
@@ -21,13 +22,20 @@ interface IIcon {
 }
 
 export default function Home() {
+
+  const nav = useNavigation();
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <TopNavScreen>
         <TopLogo source={require("../../assets/logo-letters.png")} />
 
-        <TouchableOpacity onPress={() => false} activeOpacity={0.3}>
+        <TouchableOpacity 
+          onPress={() => nav.navigate("Notificações")} 
+          activeOpacity={.3}>
+
           <MaterialCommunityIcons name="bell" size={24} color="#5d5c5f" />
+
         </TouchableOpacity>
       </TopNavScreen>
 
@@ -84,8 +92,8 @@ export default function Home() {
         />
 
         <Screen
-          name="Profile"
-          component={Profile}
+          name="UserProfile"
+          component={UserProfile}
           options={{
             tabBarLabel: "perfil",
             tabBarIcon: ({ focused, color }: IIcon) => (
