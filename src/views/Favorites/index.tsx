@@ -11,7 +11,7 @@ export default function Favorites() {
 
     if(favorites.length > 0) {
 
-        const favoritesDevs = devsList.filter(item => favorites.includes(item.id));
+        const favoritesDevs = devsList.filter(item => favorites.includes(parseInt(item.id)));
         
         return(
             <DevsList 
