@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useSelector } from "react-redux";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
@@ -22,7 +22,7 @@ export default function UserProfile() {
 
     const { email } = useSelector((state: IAppState) => state.auth);
 
-    const { name, photoUser, category, stacks, description } = useSelector((state: IAppState) => state.user);
+    const { name, photoUser, category, userStacks, description } = useSelector((state: IAppState) => state.user);
 
     const userData = ({ title, text, screenTarget }: IUserData) => {
 
@@ -67,6 +67,7 @@ export default function UserProfile() {
 
             <ProfilePicture 
                 image={photoUser}
+                updatePic={true}
             />
 
             <View style={{ marginVertical: 20, width: '100%' }}>
@@ -75,7 +76,7 @@ export default function UserProfile() {
                     userData({
                         title: "Nome",
                         text: name,
-                        screenTarget: ""
+                        screenTarget: "Editar Nome"
                     }) 
                 }
 
@@ -83,7 +84,7 @@ export default function UserProfile() {
                     userData({
                         title: "E-mail",
                         text: email,
-                        screenTarget: ""
+                        screenTarget: "Editar E-mail"
                     }) 
                 }    
 
@@ -91,7 +92,7 @@ export default function UserProfile() {
                     userData({
                         title: "Senha",
                         text: "*******",
-                        screenTarget: ""
+                        screenTarget: "Editar Senha"
                     }) 
                 }     
 
@@ -99,7 +100,7 @@ export default function UserProfile() {
                     userData({
                         title: "Categoria",
                         text: category,
-                        screenTarget: ""
+                        screenTarget: "Selecionar Categoria" 
                     }) 
                 }     
 
@@ -107,7 +108,7 @@ export default function UserProfile() {
                     userData({
                         title: "Tecnologias",
                         text: "",
-                        screenTarget: ""
+                        screenTarget: "Selecionar Tecnologias" 
                     }) 
                 }
 
@@ -115,7 +116,7 @@ export default function UserProfile() {
                     userData({
                         title: "Descrição",
                         text: description,
-                        screenTarget: ""
+                        screenTarget: "Editar Descrição" 
                     }) 
                 }
 

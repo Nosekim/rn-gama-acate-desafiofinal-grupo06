@@ -67,8 +67,8 @@ export default function DevsList({ data, typeList }: IDevsList) {
       <TitleStacks>principais tecnologias</TitleStacks>
 
       <ListDevStacks>
-        {item.stack.map((s) => (
-          <StackPill key={`${item.id}${s.name}`}>{s.name}</StackPill>
+        {item.stack.map((s, i) => (
+          <StackPill key={`${item.id}${s.name}${i}`}>{s.name}</StackPill>
         ))}
       </ListDevStacks>
     </DevCard>
@@ -80,7 +80,7 @@ export default function DevsList({ data, typeList }: IDevsList) {
         contentContainerStyle={styles.container}
         data={data}
         renderItem={({ item }) => _renderItem(item)}
-        keyExtractor={item => typeList + item.name + item.id}
+        keyExtractor={item => typeList + item.name + item._id}
       />
     </View>
   );

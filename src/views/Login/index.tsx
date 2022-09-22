@@ -11,7 +11,7 @@ import {
     InputField, 
     stylesActionButton, 
     TextButton, 
-    ContainerLink, } from '../../global/GlobalStyles';
+    ContainerLink } from '../../global/GlobalStyles';
 import styles, { FormLogin, SocialButton } from './styles';
 
 import Link from '../../components/Link';
@@ -79,7 +79,6 @@ export default function Login() {
                             autoCapitalize='none'
                             autoCorrect={false}
                             onChangeText={(text: string) => dispatch(changeEmail(text))}
-                            onSubmitEditing={() => false}
                         />
 
                         <MaterialCommunityIcons 
@@ -101,7 +100,6 @@ export default function Login() {
                             autoCapitalize='none'
                             autoCorrect={false}
                             onChangeText={(text: string) => dispatch(changePassword(text))}
-                            onSubmitEditing={() => false}
                         />
 
                         <MaterialCommunityIcons 
