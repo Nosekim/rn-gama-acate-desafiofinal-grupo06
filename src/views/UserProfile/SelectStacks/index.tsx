@@ -32,6 +32,7 @@ export default function SelectStacks() {
 
     const { userStacks } = useSelector((state: IAppState) => state.user);
 
+console.log("userStacks", userStacks)
     return(
         <SafeAreaView style={{ flex: 1 }}>
 

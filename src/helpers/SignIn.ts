@@ -6,7 +6,11 @@ import {
   changeRecoveringPassword,
 } from "../store/modules/auth/reducer";
 
-import { changeIdUser, changeName } from "../store/modules/userProfile/reducer";
+import { 
+  changeIdUser, 
+  changeName,
+  setToken 
+} from "../store/modules/userProfile/reducer";
 
 import {
   changeMsgError,
@@ -28,10 +32,16 @@ export async function signIn({ email, password, dispatch, nav }: ISignIn) {
     const user = await Auth.signIn(email, password);
 
     if (user) {
-      dispatch(changeIdUser(user.username));
-      dispatch(changeName(user.attributes.name));
+
+      const { signInUserSession, username, attributes } = user;
+
+      const { idToken } = signInUserSession;
+
+      dispatch(changeIdUser(username));
+      dispatch(changeName(attributes.name));
 
       dispatch(changeLoginMethod("email"));
+      dispatch(setToken(idToken.jwtToken));
 
       setTimeout(() => {
         dispatch(changeIsLoggedIn(true));

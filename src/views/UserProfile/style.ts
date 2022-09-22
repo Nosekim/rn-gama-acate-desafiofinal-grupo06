@@ -37,6 +37,7 @@ export const DataOption = styled.TouchableOpacity`
 
 export const TextData = styled.Text`
     font-size: 15px;
+    line-height: 22px;
     color: #FFF;
     margin-left: 8px;
 `
