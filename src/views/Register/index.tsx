@@ -84,6 +84,7 @@ export default function Register() {
 
                     <InputField 
                         value={name}
+                        autoCapitalize="words"
                         onChangeText={(text: string) => setName(text)}
                         onSubmitEditing={() => false}
                     />

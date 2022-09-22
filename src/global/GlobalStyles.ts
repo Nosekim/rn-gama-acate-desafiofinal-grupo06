@@ -79,5 +79,19 @@ export const stylesActionButton = StyleSheet.create({
         borderRadius: 10, 
         justifyContent: 'center', 
         alignItems: 'center' 
+    },
+    roundedButton: {
+        width: 44,
+        height: 44,
+        borderRadius: 22,
+        shadowColor: "#2382B8",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3.4,
+        elevation: 3,
+        position: "absolute"
     }
 })
