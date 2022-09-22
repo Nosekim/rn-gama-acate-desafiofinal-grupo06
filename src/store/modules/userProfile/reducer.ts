@@ -3,14 +3,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserProfile } from "../../../types";
 
 const initialState = {
-    idUser: "", 
-    name: "",
-    photoUser: "",
-    showModalPicture: false,
-    category: "",
-    userStacks: [],
-    state: "",
-    description: ""
+  idUser: "",
+  name: "",
+  photoUser: "",
+  category: "",
+  stacks: [],
+  state: "",
+  description: "",
+  token: "",
+  email: "",
 };
 
 const UserReducer = createSlice({
@@ -18,11 +19,16 @@ const UserReducer = createSlice({
   initialState,
   reducers: {
     changeIdUser: (state: IUserProfile, action: PayloadAction<string>) => {
-        state.idUser = action.payload;
-      },
+      state.idUser = action.payload;
+    },
     changeName: (state: IUserProfile, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
+    setToken: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
+    changeUserEmail: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.email = action.payload;
     changeCategory: (state: IUserProfile, action: PayloadAction<string>) => {
       state.category = action.payload;
     },
@@ -52,6 +58,6 @@ export const {
     removeStack,
     changeShowModalPicture,
     changePhotoUser,
-    changeDescription } = UserReducer.actions;
+    changeDescription,setToken, changeUserEmail } = UserReducer.actions;
 
 export default UserReducer.reducer;

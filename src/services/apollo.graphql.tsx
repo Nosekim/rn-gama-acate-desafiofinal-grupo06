@@ -4,7 +4,13 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
+import { Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { setContext } from "@apollo/client/link/context";
+import { IUserProfile } from "../types";
+import { View, Text } from "react-native";
 
 interface Props {
   children: React.ReactNode;
@@ -14,25 +20,63 @@ const httpLink = createHttpLink({
   uri: "https://westus.azure.realm.mongodb.com/api/client/v2.0/app/acate-gama-desafio-grupo-db-qfpod/graphql",
 });
 
-const authLink = setContext((_, { headers }) => {
-  //const token = localStorage.getItem("token");
-  return {
-    headers: {
-      ...headers,
-      //authorization: token ? `Bearer ${token}` : "",
-      apiKey:
-        "h6k2rYB1LVyFyZHplaHbrVs5YmiDvudW4eDhp1PwkoFLkXPSq7vPQrKiIGDV7eov",
-    },
-  };
-});
+const authLink = (token: string) =>
+  setContext(async (_, { headers }) => {
+    return {
+      headers: {
+        ...headers,
+        jwtTokenString: token,
+      },
+    };
+  });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+const client = (token: string) =>
+  new ApolloClient({
+    link: authLink(token).concat(httpLink),
+    cache: new InMemoryCache(),
+  });
 
 const ApolloGraphQL = ({ children }: Props) => {
-  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+  const [userToken, setUserToken] = useState<string | null>(null);
+  const { token, email } = useSelector((state: any) => state.user);
+  useEffect(() => {
+    (async () => {
+      try {
+        if (token) {
+          const localToken = await AsyncStorage.getItem("@localToken");
+          if (!localToken) {
+            const { access_token } = await fetch(
+              "https://westus.azure.data.mongodb-api.com/app/acate-gama-desafio-grupo-db-qfpod/endpoint/authenticateUser",
+              {
+                method: "POST",
+                body: JSON.stringify({ token: token }),
+              }
+            )
+              .then((response) => response.json())
+              .then((json) => json)
+              .catch((error) => {
+                throw error;
+              });
+            await AsyncStorage.setItem("@localToken", access_token);
+            setUserToken(access_token);
+          } else {
+            setUserToken(localToken);
+          }
+        }
+      } catch (error) {
+        Alert.alert("Erro", "Erro ao buscar dados do usuário");
+      }
+    })();
+  }, [token]);
+
+  if (!userToken) {
+    return (
+      <View>
+        <Text>Not logged in</Text>
+      </View>
+    );
+  }
+  return <ApolloProvider client={client(userToken)}>{children}</ApolloProvider>;
 };
 
 export default ApolloGraphQL;
