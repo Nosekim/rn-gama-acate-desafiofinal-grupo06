@@ -27,61 +27,16 @@ function AppStack() {
         }}
       >
         <Screen name="Home" component={Home} />
-
         <Screen name="Notificações" component={Notifications} />
-        <Screen 
-          name="Home" 
-          component={Home}
-        />
-
-        <Screen 
-          name="Filtrar Devs" 
-          component={FilterDevs}
-        />  
-
-        <Screen 
-          name="Notificações" 
-          component={Notifications}
-        />
-
-        <Screen 
-          name="Termos de Uso" 
-          component={Terms} 
-        />
-
+        <Screen name="Filtrar Devs" component={FilterDevs} />
         <Screen name="Termos de Uso" component={Terms} />
-
         <Screen name="Política de Privacidade" component={PrivacyPolicy} />
-        <Screen 
-          name="Editar Nome" 
-          component={EditName} 
-        />
-
-        <Screen 
-          name="Editar E-mail" 
-          component={EditEmail} 
-        />
-
-        <Screen 
-          name="Editar Senha" 
-          component={EditPassword} 
-        />
-
-        <Screen 
-          name="Selecionar Categoria" 
-          component={SelectCategory} 
-        />
-
-        <Screen 
-          name="Selecionar Tecnologias" 
-          component={SelectStacks} 
-        />
-
-        <Screen 
-          name="Editar Descrição" 
-          component={EditDescription} 
-        />
-
+        <Screen name="Editar Nome" component={EditName} />
+        <Screen name="Editar E-mail" component={EditEmail} />
+        <Screen name="Editar Senha" component={EditPassword} />
+        <Screen name="Selecionar Categoria" component={SelectCategory} />
+        <Screen name="Selecionar Tecnologias" component={SelectStacks} />
+        <Screen name="Editar Descrição" component={EditDescription} />
       </Navigator>
     </ApolloGraphQL>
   );
