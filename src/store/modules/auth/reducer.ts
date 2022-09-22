@@ -8,7 +8,7 @@ const initialState = {
   email: "",
   password: "",
   showPassword: false,
-  recoveringPassword: false
+  recoveringPassword: false,
 };
 
 const AuthReducer = createSlice({
@@ -30,18 +30,22 @@ const AuthReducer = createSlice({
     changeLoginMethod: (state: IAuth, action: PayloadAction<string>) => {
       state.loginMethod = action.payload;
     },
-    changeRecoveringPassword: (state: IAuth, action: PayloadAction<boolean>) => {
+    changeRecoveringPassword: (
+      state: IAuth,
+      action: PayloadAction<boolean>
+    ) => {
       state.recoveringPassword = action.payload;
     },
   },
 });
 
-export const { 
-  changeEmail, 
-  changePassword, 
-  changeShowPassword, 
+export const {
+  changeEmail,
+  changePassword,
+  changeShowPassword,
   changeIsLoggedIn,
-  changeLoginMethod, 
-  changeRecoveringPassword } = AuthReducer.actions;
+  changeLoginMethod,
+  changeRecoveringPassword,
+} = AuthReducer.actions;
 
 export default AuthReducer.reducer;

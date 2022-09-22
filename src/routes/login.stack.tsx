@@ -15,55 +15,28 @@ import NewPassword from "../views/NewPassword";
 
 function LoginStack() {
   return (
-    <Navigator
-      screenOptions={{ headerShown: false }}
-    >
+    <Navigator screenOptions={{ headerShown: false }}>
+      <Screen name="GetStarted" component={GetStarted} />
 
-        <Screen 
-          name="GetStarted" 
-          component={GetStarted} 
-        />
+      <Screen name="Login" component={Login} />
 
-        <Screen 
-          name="Login" 
-          component={Login} 
-        />
+      <Screen name="Recuperar Senha" component={RecoverPassword} />
 
-        <Screen 
-          name="Recuperar Senha" 
-          component={RecoverPassword} 
-        />
+      <Screen name="Nova Senha" component={NewPassword} />
 
-        <Screen 
-          name="Nova Senha" 
-          component={NewPassword} 
-        />
+      <Screen name="Cadastro" component={Register} />
 
-        <Screen 
-          name="Cadastro" 
-          component={Register} 
-        />
+      <Screen name="Verificação de Conta" component={AccountVerification} />
 
-        <Screen 
-          name="Verificação de Conta" 
-          component={AccountVerification}
-        />
+      <Screen name="Termos de Uso" component={Terms} />
 
-        <Screen 
-          name="Termos de Uso" 
-          component={Terms} 
-        />
+      <Screen name="Política de Privacidade" component={PrivacyPolicy} />
 
-        <Screen 
-          name="Política de Privacidade" 
-          component={PrivacyPolicy} 
-        />
-        
-        <Screen
-          name="Perfil do Dev"
-          options={{ headerShown: false }}
-          component={ViewProfile}
-        />
+      <Screen
+        name="Perfil do Dev"
+        options={{ headerShown: false }}
+        component={ViewProfile}
+      />
     </Navigator>
   );
 }

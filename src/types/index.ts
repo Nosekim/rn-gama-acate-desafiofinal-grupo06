@@ -81,6 +81,8 @@ export interface IUserProfile {
   stacks: string[];
   state: string;
   description: string;
+  token: string;
+  email: string;
 }
 
 export interface IAppState {
@@ -113,5 +115,5 @@ export interface IAppState {
     stacks: string[];
     state: string;
     description: string;
-  }
+  };
 }

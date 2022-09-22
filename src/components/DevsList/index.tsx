@@ -28,9 +28,7 @@ interface IDevsList {
 export default function DevsList({ data, typeList }: IDevsList) {
   const dispatch = useDispatch();
 
-  const { favorites } = useSelector(
-    (state: IAppState) => state.devs
-  );
+  const { favorites } = useSelector((state: IAppState) => state.devs);
 
   const manageFavorites = (id: number) => {
     if (favorites.includes(id)) dispatch(removeFavorite(id));
@@ -67,9 +65,11 @@ export default function DevsList({ data, typeList }: IDevsList) {
       <TitleStacks>principais tecnologias</TitleStacks>
 
       <ListDevStacks>
-        {item.stack.map((s) => (
-          <StackPill key={`${item.id}${s.name}`}>{s.name}</StackPill>
-        ))}
+        {item.stack.map((s, i) => {
+          return (
+            <StackPill key={`${item._id}${i}${s.name}`}>{s.name}</StackPill>
+          );
+        })}
       </ListDevStacks>
     </DevCard>
   );
@@ -80,7 +80,7 @@ export default function DevsList({ data, typeList }: IDevsList) {
         contentContainerStyle={styles.container}
         data={data}
         renderItem={({ item }) => _renderItem(item)}
-        keyExtractor={item => typeList + item.name + item.id}
+        keyExtractor={(item) => typeList + item.name + item.id}
       />
     </View>
   );
