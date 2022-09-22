@@ -1,17 +1,23 @@
-import styled from "styled-components/native";
+import { StyleSheet } from "react-native";
 
-export const FramePicture = styled.View`
-    width: 120px;
-    height: 120px;
-    border-radius: 60px;
-    margin: 15px 0;
-    background-color: #cccbcd;
-    justify-content: center;
-    align-items: center;
-`
-
-export const Picture = styled.Image`
-    width: 120px;
-    height: 120px;
-    border-radius: 60px;
-`
+export default StyleSheet.create({
+    frame: {
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        marginVertical: 15,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOpacity: .15,
+        shadowOffset: { width: 0, height: 0 },
+        shadowRadius: 3,
+        backgroundColor: '#cccbcd',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    picture: {
+        width: 120,
+        height: 120,
+        borderRadius: 60
+    }
+})

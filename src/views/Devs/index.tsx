@@ -1,5 +1,9 @@
+import { View, TouchableHighlight } from 'react-native';
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   listCategories,
@@ -14,6 +18,8 @@ import DevsList from "../../components/DevsList";
 import DescriptionScreen from "../../components/DescriptionScreen";
 import LoadingDevsList from "../../components/DevsList/loading";
 import { gql, useQuery } from "@apollo/client";
+
+import { stylesActionButton } from '../../global/GlobalStyles';
 
 const DEVS_QUERY = gql`
   query {
@@ -45,6 +51,8 @@ export default function Devs() {
   //console.log(data);
   const dispatch = useDispatch();
 
+  const nav = useNavigation();
+
   const { categories, stacks } = useSelector(
     (state: IAppState) => state.devs
   );
@@ -70,5 +78,36 @@ export default function Devs() {
     );
   }
 
-  return <DevsList data={data.devs} typeList="devs" />;
+  return(
+      <View style={{ flex: 1 }}>
+
+        <DevsList 
+          data={data.devs} 
+          typeList="devs" 
+        />
+
+        <LinearGradient
+            colors={['#2BC0E0', '#2382B8']}
+            style={[stylesActionButton.roundedButton, { right: 12, bottom: 10 }]}
+        >
+
+            <TouchableHighlight
+                style={[stylesActionButton.content, { borderRadius: 22 }]}
+                activeOpacity={.7}
+                onPress={() => nav.navigate("Filtrar Devs")}
+                underlayColor='#2BC0E0'
+            >
+                
+                <Ionicons 
+                    name="md-filter" 
+                    size={24} 
+                    color="#fff" 
+                />
+
+            </TouchableHighlight>
+
+        </LinearGradient>
+
+      </View>
+    )
 }

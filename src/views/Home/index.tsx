@@ -11,6 +11,8 @@ import {
 import Devs from "../Devs";
 import Favorites from "../Favorites";
 import UserProfile from "../UserProfile";
+import ModalSelectPicture from "../../components/ModalSelectPicture";
+import ShowError from "../../components/ShowError";
 
 import { TopNavScreen, TopLogo } from "./styles";
 
@@ -27,6 +29,11 @@ export default function Home() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+
+      <ModalSelectPicture />
+
+      <ShowError />
+
       <TopNavScreen>
         <TopLogo source={require("../../assets/logo-letters.png")} />
 

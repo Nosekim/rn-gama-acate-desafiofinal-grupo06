@@ -77,8 +77,9 @@ export interface IUserProfile {
   idUser: string;
   name: string;
   photoUser: string;
+  showModalPicture: boolean;
   category: string;
-  stacks: string[];
+  userStacks: string[];
   state: string;
   description: string;
   token: string;
@@ -111,8 +112,9 @@ export interface IAppState {
     idUser: string;
     name: string;
     photoUser: string;
+    showModalPicture: boolean;
     category: string;
-    stacks: string[];
+    userStacks: string[];
     state: string;
     description: string;
   };

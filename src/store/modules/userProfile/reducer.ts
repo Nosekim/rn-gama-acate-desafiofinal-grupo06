@@ -29,11 +29,35 @@ const UserReducer = createSlice({
     },
     changeUserEmail: (state: IUserProfile, action: PayloadAction<string>) => {
       state.email = action.payload;
+    changeCategory: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.category = action.payload;
+    },
+    addStack: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.userStacks = [...state.userStacks, action.payload];
+    },
+    removeStack: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.userStacks = state.userStacks.filter(item => item !== action.payload);
+    },
+    changeDescription: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.description = action.payload;
+    },
+    changeShowModalPicture: (state: IUserProfile, action: PayloadAction<boolean>) => {
+      state.showModalPicture = action.payload;
+    },
+    changePhotoUser: (state: IUserProfile, action: PayloadAction<string>) => {
+      state.photoUser = action.payload;
     },
   },
 });
 
-export const { changeIdUser, changeName, setToken, changeUserEmail } =
-  UserReducer.actions;
+export const {  
+    changeIdUser,  
+    changeName,
+    changeCategory,
+    addStack,
+    removeStack,
+    changeShowModalPicture,
+    changePhotoUser,
+    changeDescription,setToken, changeUserEmail } = UserReducer.actions;
 
 export default UserReducer.reducer;
