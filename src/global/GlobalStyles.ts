@@ -15,7 +15,7 @@ export const TextContent = styled.Text`
     font-size: 15px;
     line-height: 22px;
     color: #FFF;
-    padding: 10px 0;
+    padding: 10px;
 `
 
 export const InputField = styled.TextInput.attrs({

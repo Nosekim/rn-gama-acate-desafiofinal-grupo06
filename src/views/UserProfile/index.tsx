@@ -1,7 +1,9 @@
 import { ScrollView, View } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
+import { Auth } from 'aws-amplify';
 
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
@@ -9,6 +11,12 @@ import { Label } from "../../global/GlobalStyles";
 import { IAppState } from "../../types";
 
 import ProfilePicture from "../../components/ProfilePicture";
+
+import { 
+    changeIsLoggedIn,
+    changeEmail,
+    changePassword 
+} from "../../store/modules/auth/reducer";
 
 interface IUserData {
     title: string;
@@ -18,11 +26,28 @@ interface IUserData {
 
 export default function UserProfile() {
 
+    const dispatch = useDispatch();
+
     const nav = useNavigation();
 
     const { email } = useSelector((state: IAppState) => state.auth);
 
     const { name, photoUser, category, userStacks, description } = useSelector((state: IAppState) => state.user);
+
+    const textStacks = () => {
+
+        let text = "";
+
+        userStacks.forEach((item, i) => {
+
+            text += item;
+
+            if(i < userStacks.length - 1)
+                text += "\n"; 
+        })
+
+        return text;
+    }
 
     const userData = ({ title, text, screenTarget }: IUserData) => {
 
@@ -35,20 +60,13 @@ export default function UserProfile() {
                 activeOpacity={.3}
             >
 
-                {
-                    title !== "" ? 
-                    (
-                        <View>
+                <View>
 
-                            <Label>{ title }</Label> 
+                    <Label>{ title }</Label> 
 
-                            <TextData>{ text }</TextData>
+                    <TextData>{ text }</TextData>
 
-                        </View>
-                    ) : (
-                        <TextData>{ text }</TextData>
-                    )
-                }
+                </View>
                 
                 <AntDesign 
                     name="right" 
@@ -58,6 +76,18 @@ export default function UserProfile() {
 
             </DataOption>
         )
+    }
+
+    const signOut = async () => {
+
+        const result = await Auth.signOut();
+
+        if(result) {
+
+            dispatch(changeIsLoggedIn(false));
+            dispatch(changeEmail(""));
+            dispatch(changePassword(""));
+        }
     }
 
     return(
@@ -107,7 +137,7 @@ export default function UserProfile() {
                 { 
                     userData({
                         title: "Tecnologias",
-                        text: "",
+                        text: textStacks(),
                         screenTarget: "Selecionar Tecnologias" 
                     }) 
                 }
@@ -124,29 +154,105 @@ export default function UserProfile() {
 
                     <Label>Mais opções</Label> 
 
-                    { 
-                        userData({
-                            title: "",
-                            text: "Termos de Uso",
-                            screenTarget: "Termos de Uso"
-                        }) 
-                    }
+                    <DataOption
+                        onPress={() => nav.navigate("Fale Conosco")}
+                        activeOpacity={.3}
+                    >
 
-                    { 
-                        userData({
-                            title: "",
-                            text: "Política de Privacidade",
-                            screenTarget: "Política de Privacidade"
-                        }) 
-                    }
+                        <View style={{ flexDirection: 'row' }}>
 
-                    { 
-                        userData({
-                            title: "",
-                            text: "Sair",
-                            screenTarget: ""
-                        }) 
-                    }
+                            <Entypo 
+                                name="chat" 
+                                size={20} 
+                                color="rgba(255,255,255,.7)" 
+                            />
+
+                            <TextData>Fale Conosco</TextData>
+
+                        </View>
+                        
+                        <AntDesign 
+                            name="right" 
+                            size={20} 
+                            color="rgba(255, 255, 255, .3)" 
+                        />
+
+                    </DataOption>
+
+                    <DataOption
+                        onPress={() => nav.navigate("Termos de Uso")}
+                        activeOpacity={.3}
+                    >
+
+                        <View style={{ flexDirection: 'row' }}>
+
+                            <Ionicons 
+                                name="document-text" 
+                                size={20} 
+                                color="rgba(255,255,255,.7)" 
+                            />
+
+                            <TextData>Termos de Uso</TextData>
+
+                        </View>
+                        
+                        <AntDesign 
+                            name="right" 
+                            size={20} 
+                            color="rgba(255, 255, 255, .3)" 
+                        />
+
+                    </DataOption>
+
+                    <DataOption
+                        onPress={() => nav.navigate("Política de Privacidade")}
+                        activeOpacity={.3}
+                    >
+
+                        <View style={{ flexDirection: 'row' }}>
+
+                            <MaterialIcons 
+                                name="privacy-tip" 
+                                size={24} 
+                                color="rgba(255,255,255,.7)" 
+                            />
+
+                            <TextData>Política de Privacidade</TextData>
+
+                        </View>
+                        
+                        <AntDesign 
+                            name="right" 
+                            size={20} 
+                            color="rgba(255, 255, 255, .3)" 
+                        />
+
+                    </DataOption>
+
+                    <DataOption
+                        onPress={() => signOut()}
+                        activeOpacity={.3}
+                    >
+
+                        <View style={{ flexDirection: 'row' }}>
+
+                            <Entypo 
+                                name="log-out" 
+                                size={24} 
+                                color="rgba(255,255,255,.7)"  
+                            />
+
+                            <TextData>Sair</TextData>
+
+                        </View>
+                        
+                        <AntDesign 
+                            name="right" 
+                            size={20} 
+                            color="rgba(255, 255, 255, .3)" 
+                        />
+
+                    </DataOption>
 
                 </View>
 

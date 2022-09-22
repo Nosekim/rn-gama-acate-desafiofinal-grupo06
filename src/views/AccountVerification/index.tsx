@@ -119,7 +119,7 @@ export default function AccpuntVerification() {
             <ContainerScreen>
 
                 <TextContent style={{ marginBottom: 20 }}>
-                    Precisamos validar sua conta. Informe o código com 6 dígitos enviados para o seu e-mail
+                    Precisamos validar sua conta. Informe o código com 6 dígitos enviado para o seu e-mail
                 </TextContent>
 
                 <InputField 
