@@ -6,12 +6,12 @@ const initialState = {
   idUser: "",
   name: "",
   photoUser: "",
+  showModalPicture: false,
   category: "",
-  stacks: [],
+  userStacks: [],
   state: "",
   description: "",
-  token: "",
-  email: "",
+  token: ""
 };
 
 const UserReducer = createSlice({
@@ -26,9 +26,6 @@ const UserReducer = createSlice({
     },
     setToken: (state: IUserProfile, action: PayloadAction<string>) => {
       state.token = action.payload;
-    },
-    changeUserEmail: (state: IUserProfile, action: PayloadAction<string>) => {
-      state.email = action.payload;
     },
     changeCategory: (state: IUserProfile, action: PayloadAction<string>) => {
       state.category = action.payload;
@@ -52,7 +49,7 @@ const UserReducer = createSlice({
     },
     changePhotoUser: (state: IUserProfile, action: PayloadAction<string>) => {
       state.photoUser = action.payload;
-    },
+    }
   },
 });
 
@@ -65,8 +62,7 @@ export const {
   changeShowModalPicture,
   changePhotoUser,
   changeDescription,
-  setToken,
-  changeUserEmail,
+  setToken
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

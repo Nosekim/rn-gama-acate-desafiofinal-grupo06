@@ -26,6 +26,24 @@ export default function ModalSelectPicture() {
         setTimeout(() => { dispatch(changeStatusError(true)) }, 20);
     }
 
+    const uploadImage = async (foto: any) => {
+
+        let tamanhoImagem = foto.width;
+    
+        if(tamanhoImagem > 600)
+            tamanhoImagem = 600;
+
+        const fotoAjustada = await ImageManipulator.manipulateAsync(
+            foto.uri, [{ resize: { width: tamanhoImagem, height: tamanhoImagem } }], { compress: .9 }
+        );
+
+        if(fotoAjustada) {
+
+            dispatch(changePhotoUser(fotoAjustada.uri))
+            closeModal()
+        }
+    }
+
     const accessGalery = async () => {
 
         try {
@@ -48,23 +66,8 @@ export default function ModalSelectPicture() {
                 quality: 1
             });
     
-                if(!foto.cancelled) {
-    
-                    let tamanhoImagem = foto.width;
-    
-                    if(tamanhoImagem > 600)
-                        tamanhoImagem = 600;
-    
-                    const fotoAjustada = await ImageManipulator.manipulateAsync(
-                      foto.uri, [{ resize: { width: tamanhoImagem, height: tamanhoImagem } }], { compress: .9 }
-                    );
-    
-                    if(fotoAjustada) {
-
-                        dispatch(changePhotoUser(fotoAjustada.uri))
-                        closeModal()
-                    }
-                }
+                if(!foto.cancelled) 
+                    uploadImage(foto);
     
           } catch(error) {
             showMsgError("Erro na tentativa de fazer upload da foto do seu perfil");
@@ -97,23 +100,8 @@ export default function ModalSelectPicture() {
                     quality: 1
                 });
 
-    		    if(!foto.cancelled) {
-
-					let tamanhoImagem = foto.width;
-
-					if(tamanhoImagem > 600)
-						tamanhoImagem = 600;
-
-					const fotoAjustada = await ImageManipulator.manipulateAsync(
-                        foto.uri, [{ resize: { width: tamanhoImagem, height: tamanhoImagem } }], { compress: .9 }
-                    );
-
-					if(fotoAjustada) {
-
-						dispatch(changePhotoUser(fotoAjustada.uri))
-                        closeModal()
-					}
-				}
+    		    if(!foto.cancelled) 
+                    uploadImage(foto);
 
             } catch(error) {
                 showMsgError("Erro na tentativa de fazer upload da foto do seu perfil");

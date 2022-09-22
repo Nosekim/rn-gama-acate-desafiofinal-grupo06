@@ -48,7 +48,7 @@ const DEVS_QUERY = gql`
 
 export default function Devs() {
   const { loading, error, data } = useQuery(DEVS_QUERY);
-  //console.log(data);
+
   const dispatch = useDispatch();
 
   const nav = useNavigation();
@@ -68,7 +68,7 @@ export default function Devs() {
   }, [loading])
 
   if (loading) return <LoadingDevsList />;
-
+  
   if (error) {
     return (
       <DescriptionScreen

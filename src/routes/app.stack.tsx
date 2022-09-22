@@ -13,8 +13,10 @@ import EditPassword from "../views/UserProfile/EditPassword";
 import SelectCategory from "../views/UserProfile/SelectCategory";
 import SelectStacks from "../views/UserProfile/SelectStacks";
 import EditDescription from "../views/UserProfile/EditDescription";
+import Support from "../views/UserProfile/Support";
 
 import FilterDevs from "../views/FilterDevs";
+import ViewProfile from "../views/ViewProfile";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -37,6 +39,9 @@ function AppStack() {
         <Screen name="Selecionar Categoria" component={SelectCategory} />
         <Screen name="Selecionar Tecnologias" component={SelectStacks} />
         <Screen name="Editar Descrição" component={EditDescription} />
+        <Screen name="Fale Conosco" component={Support} />
+
+        <Screen name="Perfil do Dev" component={ViewProfile} />
       </Navigator>
     </ApolloGraphQL>
   );

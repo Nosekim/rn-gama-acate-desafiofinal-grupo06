@@ -38,7 +38,7 @@ const client = (token: string) =>
 
 const ApolloGraphQL = ({ children }: Props) => {
   const [userToken, setUserToken] = useState<string | null>(null);
-  const { token, email } = useSelector((state: any) => state.user);
+  const { token } = useSelector((state: any) => state.user);
   useEffect(() => {
     (async () => {
       try {
