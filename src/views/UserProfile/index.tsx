@@ -1,9 +1,10 @@
-import { ScrollView, View } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import { Auth } from "aws-amplify";
+import { gql, useQuery } from "@apollo/client";
 
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
@@ -24,14 +25,42 @@ interface IUserData {
   screenTarget: string;
 }
 
+const PROFILE = gql`
+  query GetDevsList($email: String!) {
+    devs(query: { email: $email }) {
+      _id
+      id
+      createdAt
+      description
+      email
+      job
+      location {
+        lat
+        lng
+      }
+      name
+      phone
+      photo
+      stack {
+        name
+        xp
+      }
+      state
+    }
+  }
+`;
+
 export default function UserProfile() {
+  const { email } = useSelector((state: IAppState) => state.auth);
+  const { loading, error, data } = useQuery(PROFILE, {
+    variables: { email: email },
+  });
+
   const dispatch = useDispatch();
 
   const nav = useNavigation();
 
-  const { email } = useSelector((state: IAppState) => state.auth);
-
-  const { name, photoUser, category, userStacks, description } = useSelector(
+  const { category, userStacks, description } = useSelector(
     (state: IAppState) => state.user
   );
 
@@ -75,15 +104,30 @@ export default function UserProfile() {
       dispatch(changePassword(""));
     }
   };
-
+  if (loading)
+    return (
+      <View
+        style={{
+          flex: 1,
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
+    );
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfilePicture image={photoUser} updatePic={true} />
+      <ProfilePicture image={data.devs[0].photo} updatePic={true} />
 
       <View style={{ marginVertical: 20, width: "100%" }}>
         {userData({
           title: "Nome",
-          text: name,
+          text: data.devs[0].name,
           screenTarget: "Editar Nome",
         })}
 

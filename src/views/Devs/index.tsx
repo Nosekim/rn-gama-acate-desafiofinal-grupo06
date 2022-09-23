@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { gql, useQuery } from "@apollo/client";
 
 import {
   listCategories,
@@ -17,7 +18,6 @@ import { IAppState } from "../../types";
 import DevsList from "../../components/DevsList";
 import DescriptionScreen from "../../components/DescriptionScreen";
 import LoadingDevsList from "../../components/DevsList/loading";
-import { gql, useQuery } from "@apollo/client";
 
 import { stylesActionButton } from "../../global/GlobalStyles";
 
