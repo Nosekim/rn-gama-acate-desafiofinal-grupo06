@@ -30,7 +30,7 @@ export default function DevsList({ data, typeList }: IDevsList) {
 
   const { favorites } = useSelector((state: IAppState) => state.devs);
 
-  const manageFavorites = (id: number) => {
+  const manageFavorites = (id: string) => {
     if (favorites.includes(id)) dispatch(removeFavorite(id));
     else dispatch(addFavorite(id));
   };
@@ -49,15 +49,13 @@ export default function DevsList({ data, typeList }: IDevsList) {
         </MainData>
 
         <TouchableOpacity
-          //onPress={() => manageFavorites(item.id)}
+          onPress={() => manageFavorites(item.id)}
           activeOpacity={0.3}
         >
           <FontAwesome
-            //name={favorites.includes(item.id) ? "heart" : "heart-o"}
-            name="heart-o"
+            name={favorites.includes(item.id) ? "heart" : "heart-o"}
             size={20}
-            color="#bfbfbf"
-            //color={favorites.includes(item.id) ? "#f14a41" : }
+            color={favorites.includes(item.id) ? "#f14a41" : "#bfbfbf"}
           />
         </TouchableOpacity>
       </FirstLine>

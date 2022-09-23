@@ -1,7 +1,4 @@
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
-<<<<<<< HEAD
-import { useSelector } from "react-redux";
-=======
 import { Auth } from "aws-amplify";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +12,6 @@ import {
   changeName,
   setToken,
 } from "../store/modules/userProfile/reducer";
->>>>>>> 8a93f1034547601aaa356875d5fd2a8bfba0d543
 
 import { IAppState } from "../types";
 
@@ -31,10 +27,6 @@ const theme = {
 };
 
 function RootRoutes() {
-<<<<<<< HEAD
-
-  const { isLoggedIn } = useSelector((state: IAppState) => state.auth);
-=======
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: IAppState) => state.auth);
 
@@ -61,7 +53,6 @@ function RootRoutes() {
       })
       .catch((err) => console.log(err));
   }, []);
->>>>>>> 8a93f1034547601aaa356875d5fd2a8bfba0d543
 
   return (
     <NavigationContainer theme={theme}>

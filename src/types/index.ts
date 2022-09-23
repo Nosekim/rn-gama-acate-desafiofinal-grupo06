@@ -60,7 +60,22 @@ export interface IDevsList {
 }
 
 export interface IFavorites {
-  favorites: number[];
+  favorites: string[];
+}
+
+export interface IFilter {
+  stack: string;
+  junior: boolean;
+  middle: boolean;
+  senior: boolean;
+}
+
+export interface IFilters {
+  filters: IFilter[];
+}
+
+export interface IFilteredDevs {
+  filteredDevs: IDev[];
 }
 
 export interface ILoadingData {
@@ -99,6 +114,8 @@ export interface IAppState {
     stacks: IStack[];
     states: IState[];
     devsList: IDev[];
+    filters: IFilter[];
+    filteredDevs: IDev[];
     favorites: number[];
     loadingData: boolean;
   };

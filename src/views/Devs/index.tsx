@@ -9,7 +9,9 @@ import { gql, useQuery } from "@apollo/client";
 import {
   listCategories,
   listStacks,
+  listDevs,
   changeLoadingStatus,
+  listFilteredDevs
 } from "../../store/modules/devsData/reducer";
 import { getDataApi } from "../../services";
 
@@ -47,15 +49,11 @@ const DEVS_QUERY = gql`
 `;
 
 export default function Devs() {
-<<<<<<< HEAD
-  const { loading, error, data } = useQuery(DEVS_QUERY);
-=======
-  const { categories, stacks } = useSelector((state: IAppState) => state.devs);
+  const { categories, stacks, filteredDevs } = useSelector((state: IAppState) => state.devs);
   const { email } = useSelector((state: IAppState) => state.auth);
   const { loading, error, data } = useQuery(DEVS_QUERY, {
     variables: { email: email },
   });
->>>>>>> 8a93f1034547601aaa356875d5fd2a8bfba0d543
 
   const dispatch = useDispatch();
 
@@ -68,7 +66,13 @@ export default function Devs() {
   }, []);
 
   useEffect(() => {
-    dispatch(changeLoadingStatus(loading));
+
+    if(!loading) {
+
+      dispatch(listDevs(data.devs));
+      dispatch(listFilteredDevs(data.devs));
+      dispatch(changeLoadingStatus(false));
+    }
   }, [loading]);
 
   if (loading) return <LoadingDevsList />;
@@ -85,7 +89,7 @@ export default function Devs() {
 
   return (
     <View style={{ flex: 1 }}>
-      <DevsList data={data.devs} typeList="devs" />
+      <DevsList data={filteredDevs} typeList="devs" />
 
       <LinearGradient
         colors={["#2BC0E0", "#2382B8"]}
