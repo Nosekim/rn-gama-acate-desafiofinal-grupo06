@@ -24,6 +24,30 @@
 - Favoritar os devs que desejar.
 - Usuários podem editar os dados de acordo com o seu próprio perfil.
 
+## Dependências utilizadas
+- @apollo/client
+- @react-native-async-storage/async-storage
+- @react-native-picker/picker
+- @react-navigation/bottom-tabs
+- @react-navigation/native
+- @react-navigation/native-stack
+- @reduxjs/toolkit
+- @types/styled-components-react-native
+- aws-amplify
+- expo-image-manipulator
+- expo-image-picker
+- expo-linear-gradient
+- expo-notifications
+- expo-status-bar
+- graphql
+- react-native-safe-area-context
+- react-native-shimmer-placeholder
+- react-native-tab-view
+- react-redux
+- realm-web
+- redux
+- styled-components
+
 ## Como testar o projeto
 
 - Clone o projeto:
