@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
@@ -24,28 +24,26 @@ interface IIcon {
 }
 
 export default function Home() {
-
   const nav = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{}}>
+        <ModalSelectPicture />
 
-      <ModalSelectPicture />
+        <ShowError />
 
-      <ShowError />
+        <TopNavScreen>
+          <TopLogo source={require("../../assets/logo-letters.png")} />
 
-      <TopNavScreen>
-        <TopLogo source={require("../../assets/logo-letters.png")} />
-
-        <TouchableOpacity 
-          onPress={() => nav.navigate("Notificações")} 
-          activeOpacity={.3}>
-
-          <MaterialCommunityIcons name="bell" size={24} color="#5d5c5f" />
-
-        </TouchableOpacity>
-      </TopNavScreen>
-
+          <TouchableOpacity
+            onPress={() => nav.navigate("Notificações")}
+            activeOpacity={0.3}
+          >
+            <MaterialCommunityIcons name="bell" size={24} color="#5d5c5f" />
+          </TouchableOpacity>
+        </TopNavScreen>
+      </SafeAreaView>
       <Navigator
         initialRouteName="DevsList"
         screenOptions={{
@@ -56,7 +54,7 @@ export default function Home() {
             textTransform: "uppercase",
           },
           tabBarStyle: {
-            height: 55,
+            //height: 55,
             backgroundColor: "#343138",
             borderTopLeftRadius: 12,
             borderTopRightRadius: 12,
@@ -64,7 +62,7 @@ export default function Home() {
             borderTopWidth: 0,
           },
           tabBarItemStyle: {
-            marginVertical: 5,
+            //marginVertical: 5,
           },
         }}
       >
@@ -113,6 +111,6 @@ export default function Home() {
           }}
         />
       </Navigator>
-    </SafeAreaView>
+    </View>
   );
 }
