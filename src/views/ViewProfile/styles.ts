@@ -1,7 +1,18 @@
 import styled from "styled-components/native";
 
+export const ContainerMain = styled.View`
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 100px 22px 35px;
+    height: 100%;
+    width: 100%;
+    background-color: #272629;
+`
+
 export const ContainerTextTop = styled.View`
-    height: 60px;
+    position: absolute;
+    top: 40px;
     width: 100%;
     flex-direction: row;
     align-items: center;
@@ -9,16 +20,21 @@ export const ContainerTextTop = styled.View`
 `
 
 export const TextTop = styled.Text`
+    font-style: normal;
     font-weight: 700;
     font-size: 14px;
+    line-height: 17px;
     color: #FBFBFE;
+    margin-left: 38px;
 `
 
 export const ContainerImageProfile = styled.View`
+  display: flex;
   justify-content: center;
   align-items: center;
+  height: auto;
   width: 100%;
-  margin: 30px 0;
+  margin-bottom: 34px;
 `
 
 export const ImageProfile = styled.Image`
@@ -40,8 +56,9 @@ export const TextStackMainDev = styled.Text`
 export const TextDescriptionDev = styled.Text`
   color: #FFF;
   text-align: left;
-  font-size: 14px;
-  line-height: 20px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22.5px;
 `
 
 export const ContainerStacks = styled.View`
@@ -91,8 +108,8 @@ export const Footer = styled.View`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10px 0;
-  border-top-color: rgba(255, 255, 255, .2) ;
+  padding-top: 20px;
+  border-top-color: rgba(255, 255, 255, 0.5) ;
   border-top-width: .8px;
 `
 
@@ -106,25 +123,9 @@ export const TextButton = styled.Text`
 `
 
 export const StyledBackButtons = styled.TouchableOpacity`  
-    justify-content: center;
-    height: 40px; 
-    width: 40px;
+  position: absolute;
+  left: 0;
 `
 
 export const StyledButtons = styled.TouchableOpacity`  
-`
-
-export const ModalOption = styled.TouchableOpacity`
-  width: 100%;
-  height: 60px;
-  border-bottom-color: rgba(255,255,255,.05);
-  border-bottom-width: 1px;
-  flex-direction: row;
-  align-items: center;
-`
-
-export const TextOption = styled.Text`
-  color: #fff;
-  font-size: 15px;
-  margin-left: 12px
 `

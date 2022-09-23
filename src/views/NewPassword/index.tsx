@@ -16,7 +16,7 @@ import {
     TextContent,
     ContainerLink } from '../../global/GlobalStyles';
 
-import { IAuthState } from '../../types';
+import { IAppState } from '../../types';
 
 import TopBarNav from '../../components/TopBarNav';
 import ShowPassword from '../../components/ShowPassword';
@@ -42,7 +42,7 @@ export default function NewPassword() {
     const [code, setCode] = useState('');
     const [password, setPassword] = useState('');
 
-    const { email, showPassword } = useSelector((state: IAuthState) => state.auth);
+    const { email, showPassword } = useSelector((state: IAppState) => state.auth);
 
     useEffect(() => {
         setUsedEmail(email);

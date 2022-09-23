@@ -11,7 +11,7 @@ export default StyleSheet.create({
         shadowOpacity: .15,
         shadowOffset: { width: 0, height: 0 },
         shadowRadius: 3,
-        backgroundColor: '#000',
+        backgroundColor: '#cccbcd',
         justifyContent: 'center',
         alignItems: 'center'
     },

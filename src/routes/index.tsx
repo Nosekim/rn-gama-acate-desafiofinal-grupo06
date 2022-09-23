@@ -13,7 +13,7 @@ import {
   setToken,
 } from "../store/modules/userProfile/reducer";
 
-import { IAuthState } from "../types";
+import { IAppState } from "../types";
 
 import AppStack from "./app.stack";
 import LoginStack from "./login.stack";
@@ -28,8 +28,8 @@ const theme = {
 
 function RootRoutes() {
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state: IAuthState) => state.auth);
-
+  const { isLoggedIn } = useSelector((state: IAppState) => state.auth);
+  console.log("isLoggedIn ROOT NAVIGATION: ", isLoggedIn);
   useEffect(() => {
     Auth.currentAuthenticatedUser({
       bypassCache: false,

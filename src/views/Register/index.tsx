@@ -19,7 +19,7 @@ import ShowPassword from '../../components/ShowPassword';
 import ProcessingAction from '../../components/ProcessingAction';
 import ShowError from '../../components/ShowError';
 
-import { IAuthState } from '../../types';
+import { IAppState } from '../../types';
 
 import { signUp } from '../../helpers/SignUp';
 import { validateEmail } from '../../utils';
@@ -39,7 +39,7 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { showPassword } = useSelector((state: IAuthState) => state.auth);
+    const { showPassword } = useSelector((state: IAppState) => state.auth);
 
     useEffect(() => {
         dispatch(changeProcessingAction(false));

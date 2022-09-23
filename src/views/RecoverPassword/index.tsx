@@ -14,7 +14,7 @@ import {
     TextContent,
     ContainerLink } from '../../global/GlobalStyles';
 
-import { IAuthState } from '../../types';
+import { IAppState } from '../../types';
 
 import TopBarNav from '../../components/TopBarNav';
 import ProcessingAction from '../../components/ProcessingAction';
@@ -37,7 +37,7 @@ export default function RecoverPassword() {
     const [usedEmail, setUsedEmail] = useState('');
     const [completed, setCompleted] = useState(false);
 
-    const { email } = useSelector((state: IAuthState) => state.auth);
+    const { email } = useSelector((state: IAppState) => state.auth);
 
     useEffect(() => {
 
