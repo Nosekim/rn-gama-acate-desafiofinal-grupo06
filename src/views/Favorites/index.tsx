@@ -8,10 +8,11 @@ import DevsList from "../../components/DevsList";
 export default function Favorites() {
 
     const { devsList, favorites } = useSelector((state: IAppState) => state.devs)
-
+console.log("favorites", favorites)
+console.log("DevsList", devsList)
     if(favorites.length > 0) {
 
-        const favoritesDevs = devsList.filter(item => favorites.includes(parseInt(item.id)));
+        const favoritesDevs = devsList.filter(item => favorites.includes(item.id));
         
         return(
             <DevsList 
