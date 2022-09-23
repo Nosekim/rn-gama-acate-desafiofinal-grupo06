@@ -18,6 +18,7 @@ import {
   changeEmail,
   changePassword,
 } from "../../store/modules/auth/reducer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface IUserData {
   title: string;
@@ -96,9 +97,14 @@ export default function UserProfile() {
   };
 
   const signOut = async () => {
-    const result = await Auth.signOut();
-
-    if (result) {
+    let hasError;
+    try {
+      await Auth.signOut();
+    } catch (error) {
+      hasError = true;
+    }
+    if (!hasError) {
+      await AsyncStorage.removeItem("@localToken");
       dispatch(changeIsLoggedIn(false));
       dispatch(changeEmail(""));
       dispatch(changePassword(""));
