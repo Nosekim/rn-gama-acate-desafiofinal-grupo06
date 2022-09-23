@@ -29,7 +29,7 @@ const theme = {
 function RootRoutes() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: IAppState) => state.auth);
-
+  console.log("isLoggedIn ROOT NAVIGATION: ", isLoggedIn);
   useEffect(() => {
     Auth.currentAuthenticatedUser({
       bypassCache: false,

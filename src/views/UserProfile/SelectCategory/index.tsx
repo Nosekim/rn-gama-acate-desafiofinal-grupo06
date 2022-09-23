@@ -75,7 +75,6 @@ export default function SelectCategory() {
 
   useEffect(() => {
     if (profileData) {
-      console.log(profileData.devs[0].job);
       setNewCategory(profileData.devs[0].job);
       dispatch(changeProcessingAction(false));
     }

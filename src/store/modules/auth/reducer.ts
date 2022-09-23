@@ -9,6 +9,7 @@ const initialState = {
   password: "",
   showPassword: false,
   recoveringPassword: false,
+  apolloReady: false,
 };
 
 const AuthReducer = createSlice({
@@ -36,6 +37,9 @@ const AuthReducer = createSlice({
     ) => {
       state.recoveringPassword = action.payload;
     },
+    changeApolloReady: (state: IAuth, action: PayloadAction<boolean>) => {
+      state.apolloReady = action.payload;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   changeIsLoggedIn,
   changeLoginMethod,
   changeRecoveringPassword,
+  changeApolloReady,
 } = AuthReducer.actions;
 
 export default AuthReducer.reducer;
