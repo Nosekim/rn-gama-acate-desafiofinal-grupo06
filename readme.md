@@ -1,12 +1,12 @@
-# Curso Gama Academy - Acate - Masterclass Semana 01
+# Curso Gama Academy - Acate - Desafio Final
 
-<!-- <div align="center" style="margin: 20px; text-align: center">  
+<div align="center" style="margin: 20px; text-align: center">  
   <img
-    src="https://github.com/Nosekim/acate-rickandmorty/blob/main/Rick-And-Morty-Logo.png"
-    alt="Rick and Morty"
+    src="https://i.imgur.com/yHLrvn0.png"
+    alt="Not Extreme Go Horse"
     style="display: inline-block; margin: 0 auto; max-width: 300px"
     width="300">
-</div> -->
+</div>
 
 ## ✔️ tecnologias utilizadas
 - ``Expo``
@@ -31,6 +31,11 @@
 - Consumir API externa com axios para obter os dados dos personagens e episodios de Rick and Morty.
 - Renderizar os dados em tela com React Native.
 - Criar um modal para mostrar os dados do personagem selecionado.
+
+## Imagens
+| iOs  |  Android  |
+| ------------------- | ------------------- |
+|  <img src="https://i.imgur.com/c8JXrmV.png" width="180"> |  <img src="https://i.imgur.com/pd2d947.png" width="180"> |
 
 ## Como testar o projeto
 
