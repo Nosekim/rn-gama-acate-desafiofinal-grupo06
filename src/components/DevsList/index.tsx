@@ -1,5 +1,6 @@
 import { View, FlatList, Image, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -29,6 +30,7 @@ interface IDevsList {
 
 export default function DevsList({ data, typeList }: IDevsList) {
   const dispatch = useDispatch();
+  const nav = useNavigation();
 
   const nav = useNavigation();
 
@@ -53,7 +55,12 @@ export default function DevsList({ data, typeList }: IDevsList) {
           <Image style={styles.photoDev} source={{ uri: item.photo }} />
 
           <View>
-            <NameDev>{item.name}</NameDev>
+            <TouchableOpacity
+              onPress={() => nav.navigate("Perfil do Dev")}
+              activeOpacity={0.3}
+            >
+              <NameDev>{item.name}</NameDev>
+            </TouchableOpacity>
 
             <CategoryDev>{item.job}</CategoryDev>
           </View>

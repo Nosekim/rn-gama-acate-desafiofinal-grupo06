@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-
 import { IDevsState, IDev } from '../../types';
+import { useNavigation } from "@react-navigation/native";
 
 import {
   ContainerTextTop,
@@ -38,7 +38,6 @@ import {
 } from "../../store/modules/devsData/reducer";
 
 export default function ViewProfile() {
-
   const dispatch = useDispatch();
 
   const [data, setData] = useState<IDev>();
@@ -145,7 +144,6 @@ export default function ViewProfile() {
               color="rgba(255, 255, 255, 0.50)"
             />
           </StyledBackButtons>
-          
           <TextTop>
               Perfil de { data?.name }
           </TextTop>
