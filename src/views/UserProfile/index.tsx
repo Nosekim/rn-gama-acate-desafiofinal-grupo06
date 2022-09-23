@@ -1,4 +1,5 @@
 import { ActivityIndicator, ScrollView, View } from "react-native";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +10,7 @@ import { gql, useQuery } from "@apollo/client";
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
 
-import { IAppState } from "../../types";
+import { IUserState, IAuthState } from "../../types";
 
 import ProfilePicture from "../../components/ProfilePicture";
 
@@ -51,7 +52,7 @@ const PROFILE = gql`
 `;
 
 export default function UserProfile() {
-  const { email } = useSelector((state: IAppState) => state.auth);
+  const { email } = useSelector((state: IAuthState) => state.auth);
   const { loading, error, data } = useQuery(PROFILE, {
     variables: { email: email },
   });
@@ -60,8 +61,8 @@ export default function UserProfile() {
 
   const nav = useNavigation();
 
-  const { category, userStacks, description } = useSelector(
-    (state: IAppState) => state.user
+  const { category, userStacks, description, photoUser } = useSelector(
+    (state: IUserState) => state.user
   );
 
   const textStacks = () => {
@@ -97,8 +98,9 @@ export default function UserProfile() {
 
   const signOut = async () => {
     const result = await Auth.signOut();
-
+  
     if (result) {
+
       dispatch(changeIsLoggedIn(false));
       dispatch(changeEmail(""));
       dispatch(changePassword(""));
@@ -122,7 +124,7 @@ export default function UserProfile() {
     );
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfilePicture image={data.devs[0].photo} updatePic={true} />
+      <ProfilePicture image={photoUser} updatePic={true} />
 
       <View style={{ marginVertical: 20, width: "100%" }}>
         {userData({

@@ -1,13 +1,15 @@
 import { View, FlatList, Image, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   addFavorite,
   removeFavorite,
+  manageSelectDev
 } from "../../store/modules/devsData/reducer";
 
-import { IDev, IAppState } from "../../types";
+import { IDev, IDevsState } from "../../types";
 
 import styles, {
   CategoryDev,
@@ -28,15 +30,24 @@ interface IDevsList {
 export default function DevsList({ data, typeList }: IDevsList) {
   const dispatch = useDispatch();
 
-  const { favorites } = useSelector((state: IAppState) => state.devs);
+  const nav = useNavigation();
+
+  const { favorites } = useSelector((state: IDevsState) => state.devs);
 
   const manageFavorites = (id: string) => {
+
     if (favorites.includes(id)) dispatch(removeFavorite(id));
     else dispatch(addFavorite(id));
   };
 
   const _renderItem = (item: IDev) => (
-    <DevCard>
+    <DevCard
+      onPress={() => {
+        dispatch(manageSelectDev(item.id));
+        nav.navigate("Perfil do Dev")
+      }}
+      activeOpacity={.7}
+    >
       <FirstLine>
         <MainData>
           <Image style={styles.photoDev} source={{ uri: item.photo }} />

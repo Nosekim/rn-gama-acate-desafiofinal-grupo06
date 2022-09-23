@@ -9,8 +9,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { setContext } from "@apollo/client/link/context";
-import { IUserProfile } from "../types";
+import { IUserState } from "../types";
 import { View, Text } from "react-native";
+
+import DescriptionScreen from "../components/DescriptionScreen";
 
 interface Props {
   children: React.ReactNode;
@@ -38,7 +40,7 @@ const client = (token: string) =>
 
 const ApolloGraphQL = ({ children }: Props) => {
   const [userToken, setUserToken] = useState<string | null>(null);
-  const { token } = useSelector((state: any) => state.user);
+  const { token } = useSelector((state: IUserState) => state.user);
   useEffect(() => {
     (async () => {
       try {
@@ -71,8 +73,13 @@ const ApolloGraphQL = ({ children }: Props) => {
 
   if (!userToken) {
     return (
-      <View>
-        <Text>Not logged in</Text>
+      <View style={{ flex: 1, backgroundColor: "#272629" }}>
+
+        <DescriptionScreen
+          image={require("../assets/logo.png")}
+          text="Estabelecendo a conexão com o servidor..."
+        />
+
       </View>
     );
   }

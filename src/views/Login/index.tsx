@@ -19,7 +19,7 @@ import ShowPassword from "../../components/ShowPassword";
 import ProcessingAction from "../../components/ProcessingAction";
 import ShowError from "../../components/ShowError";
 
-import { IAppState } from "../../types";
+import { IAuthState } from "../../types";
 
 import { changeEmail, changePassword } from "../../store/modules/auth/reducer";
 import {
@@ -37,7 +37,7 @@ export default function Login() {
   const nav = useNavigation();
 
   const { email, password, showPassword } = useSelector(
-    (state: IAppState) => state.auth
+    (state: IAuthState) => state.auth
   );
 
   useEffect(() => {

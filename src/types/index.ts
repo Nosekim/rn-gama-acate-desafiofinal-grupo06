@@ -7,6 +7,17 @@ export interface IAuth {
   recoveringPassword: boolean;
 }
 
+export interface IAuthState {
+  auth: {
+    isLoggedIn: boolean;
+    loginMethod: string;
+    email: string;
+    password: string;
+    showPassword: boolean;
+    recoveringPassword: boolean;
+  }
+}
+
 export interface ICategory {
   id: number;
   name: string;
@@ -82,33 +93,11 @@ export interface ILoadingData {
   loadingData: boolean;
 }
 
-export interface IInfoProcess {
-  showError: boolean;
-  msgError: string;
-  processingAction: boolean;
+export interface ISelectedDev {
+  selectedDevId: string;
 }
 
-export interface IUserProfile {
-  idUser: string;
-  name: string;
-  photoUser: string;
-  showModalPicture: boolean;
-  category: string;
-  userStacks: string[];
-  state: string;
-  description: string;
-  token: string;
-}
-
-export interface IAppState {
-  auth: {
-    isLoggedIn: boolean;
-    loginMethod: string;
-    email: string;
-    password: string;
-    showPassword: boolean;
-    recoveringPassword: boolean;
-  };
+export interface IDevsState {
   devs: {
     categories: ICategory[];
     stacks: IStack[];
@@ -118,17 +107,44 @@ export interface IAppState {
     filteredDevs: IDev[];
     favorites: number[];
     loadingData: boolean;
+    selectedDevId: string;
   };
+}
+
+export interface IInfoProcess {
+  showError: boolean;
+  msgError: string;
+  processingAction: boolean;
+}
+
+export interface IInfoState {
   info: {
     showError: boolean;
     msgError: string;
     processingAction: boolean;
   };
+}
+
+export interface IUserProfile {
+  idUser: string;
+  name: string;
+  photoUser: string;
+  showModalPicture: boolean;
+  loadingPicture: boolean;
+  category: string;
+  userStacks: string[];
+  state: string;
+  description: string;
+  token: string;
+}
+
+export interface IUserState {
   user: {
     idUser: string;
     name: string;
     photoUser: string;
     showModalPicture: boolean;
+    loadingPicture: boolean;
     category: string;
     userStacks: string[];
     state: string;

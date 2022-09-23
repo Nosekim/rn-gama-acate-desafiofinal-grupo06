@@ -13,7 +13,8 @@ import {
     IFilters,
     IFilteredDevs, 
     IFavorites, 
-    ILoadingData } from "../../../types";
+    ILoadingData,
+    ISelectedDev } from "../../../types";
 
 const initialState = {
     categories: [],
@@ -23,7 +24,8 @@ const initialState = {
     favorites: [],
     filters: [],
     filteredDevs: [],
-    loadingData: false
+    loadingData: false,
+    selectedDevId: ""
 }
 
 const DevsDataReducer = createSlice({
@@ -64,15 +66,18 @@ const DevsDataReducer = createSlice({
         addFavorite: (state: IFavorites, action: PayloadAction<string>) => {
             state.favorites = [...state.favorites, action.payload]
         },
-        listFilteredDevs: (state: IFilteredDevs, action: PayloadAction<IFilteredDevs>) => {
-            state.filteredDevs = [ ...action.payload ]
-        },
         removeFavorite: (state: IFavorites, action: PayloadAction<string>) => {
             state.favorites = state.favorites.filter(item => item !== action.payload)
         },
+        listFilteredDevs: (state: IFilteredDevs, action: PayloadAction<IFilteredDevs>) => {
+            state.filteredDevs = [ ...action.payload ]
+        },
         changeLoadingStatus: (state: ILoadingData, action: PayloadAction<boolean>) => {
             state.loadingData = action.payload;
-        }
+        },
+        manageSelectDev: (state: ISelectedDev, action: PayloadAction<string>) => {
+            state.selectedDevId = action.payload;
+        },
     }
 })
 
@@ -87,6 +92,7 @@ export const {
     listFilteredDevs,
     addFavorite, 
     removeFavorite, 
-    changeLoadingStatus } = DevsDataReducer.actions;
+    changeLoadingStatus,
+    manageSelectDev } = DevsDataReducer.actions;
 
 export default DevsDataReducer.reducer;

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { Auth } from 'aws-amplify';
 
-import { IAppState } from '../../../types';
+import { IUserState } from '../../../types';
 
 import TopBarNav from "../../../components/TopBarNav";
 import ProcessingAction from "../../../components/ProcessingAction";
@@ -31,7 +31,7 @@ export default function EditName() {
     const [newName, setNewName] = useState('');
     const [completed, setCompleted] = useState(false);
 
-    const { name } = useSelector((state: IAppState) => state.user);
+    const { name } = useSelector((state: IUserState) => state.user);
 
     useEffect(() => {
 

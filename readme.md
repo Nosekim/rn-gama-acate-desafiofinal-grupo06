@@ -1,12 +1,4 @@
-# Curso Gama Academy - Acate - Masterclass Semana 01
-
-<!-- <div align="center" style="margin: 20px; text-align: center">  
-  <img
-    src="https://github.com/Nosekim/acate-rickandmorty/blob/main/Rick-And-Morty-Logo.png"
-    alt="Rick and Morty"
-    style="display: inline-block; margin: 0 auto; max-width: 300px"
-    width="300">
-</div> -->
+# Curso Gama Academy - Acate - Desafio Final
 
 ## ✔️ tecnologias utilizadas
 - ``Expo``
@@ -14,33 +6,33 @@
 - ``Typescript``
 - ``GraphQL``
 - ``SSO AWS Cognito``
+- ``Amplify``
 
 ## ✔️ técnicas utilizadas
-- ``Consumo de API externa com axios``
+- ``Consumo de API externa``
 - ``Criação de listas``
+- ``Filtragem de dados``
 - ``Abstração``
+- ``Manipulação de imagem vinda da câmera ou galeria``
 
 ## Objetivos 🎯
 
-- Fazer o acompanhamento das aulas e masterclass do programa Dev For Tech I Mobile (React Native) - Turma 05.
-- Revisão de conceitos básicos de React Native.
-- Criação de listas com React Native.
-
-## Requisitos 📌
-
-- Consumir API externa com axios para obter os dados dos personagens e episodios de Rick and Morty.
-- Renderizar os dados em tela com React Native.
-- Criar um modal para mostrar os dados do personagem selecionado.
+- Criação e autenticação de usuários.
+- Criação de listas com os dados dos devs presentes na base de dados.
+- Filtrar os dados para ver apenas os perfis com os parâmetros designados.
+- Visualizar os dados do perfil de cada dev ao se clicar nele.
+- Favoritar os devs que desejar.
+- Usuários podem editar os dados de acordo com o seu próprio perfil.
 
 ## Como testar o projeto
 
 - Clone o projeto:
 ```
-git clone https://github.com/Nosekim/acate-rickandmorty.git
+git clone https://github.com/Nosekim/rn-gama-acate-desafiofinal-grupo06.git
 ```
 - Navegue para dentro da pasta do projeto após clonado
 ```
-cd acate-rickandmorty
+cd rn-gama-acate-desafiofinal-grupo06
 ```
 - Instale as dependências do projeto
 
@@ -50,10 +42,4 @@ cd acate-rickandmorty
 
 - Rode a aplicação:
 
-|         yarn              |      npm         |
-|--------------------------|----------------------|
-|```yarn start``` |```npm run start``` |
-
-
-## TODO:
-- [ ] Atualizar readme com os dados do projeto.
+```npx expo start```
