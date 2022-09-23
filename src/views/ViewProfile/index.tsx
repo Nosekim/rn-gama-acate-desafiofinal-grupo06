@@ -1,5 +1,6 @@
 import React from "react";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from "@react-navigation/native";
 
 import {
   ContainerTextTop,
@@ -29,10 +30,16 @@ import {
 } from '@expo/vector-icons';
 
 export default function ViewProfile() {
+  const nav = useNavigation();
+
+  
+
   return (
     <ContainerMain>
       <ContainerTextTop>
-        <StyledBackButtons>
+        <StyledBackButtons
+          onPress={() => nav(-1)}
+        >
           <AntDesign
             name="left"
             size={24}
