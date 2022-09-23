@@ -1,5 +1,6 @@
 import { View, FlatList, Image, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import {
@@ -27,6 +28,7 @@ interface IDevsList {
 
 export default function DevsList({ data, typeList }: IDevsList) {
   const dispatch = useDispatch();
+  const nav = useNavigation();
 
   const { favorites } = useSelector((state: IAppState) => state.devs);
 
@@ -42,7 +44,12 @@ export default function DevsList({ data, typeList }: IDevsList) {
           <Image style={styles.photoDev} source={{ uri: item.photo }} />
 
           <View>
-            <NameDev>{item.name}</NameDev>
+            <TouchableOpacity
+              onPress={() => nav.navigate("Perfil do Dev")}
+              activeOpacity={0.3}
+            >
+              <NameDev>{item.name}</NameDev>
+            </TouchableOpacity>
 
             <CategoryDev>{item.job}</CategoryDev>
           </View>
@@ -57,7 +64,7 @@ export default function DevsList({ data, typeList }: IDevsList) {
             name="heart-o"
             size={20}
             color="#bfbfbf"
-            //color={favorites.includes(item.id) ? "#f14a41" : }
+          //color={favorites.includes(item.id) ? "#f14a41" : }
           />
         </TouchableOpacity>
       </FirstLine>
