@@ -41,11 +41,11 @@
 
 - Clone o projeto:
 ```
-git clone https://github.com/Nosekim/acate-rickandmorty.git
+git clone https://github.com/Nosekim/rn-gama-acate-desafiofinal-grupo06.git
 ```
 - Navegue para dentro da pasta do projeto após clonado
 ```
-cd acate-rickandmorty
+cd rn-gama-acate-desafiofinal-grupo06
 ```
 - Instale as dependências do projeto
 
