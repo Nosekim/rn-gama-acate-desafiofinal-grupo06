@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import { Auth } from "aws-amplify";
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
