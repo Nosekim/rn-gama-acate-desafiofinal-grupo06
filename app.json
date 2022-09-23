@@ -17,6 +17,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "scheme": "find-dev",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.acategama.finddev.grupo06"
