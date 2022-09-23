@@ -1,10 +1,9 @@
-import { ActivityIndicator, ScrollView, View } from "react-native";
+import { Text, ScrollView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import { Auth } from "aws-amplify";
-import { gql, useQuery } from "@apollo/client";
 
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
@@ -19,6 +18,7 @@ import {
   changePassword,
 } from "../../store/modules/auth/reducer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../../contexts/userContext";
 
 interface IUserData {
   title: string;
@@ -26,36 +26,8 @@ interface IUserData {
   screenTarget: string;
 }
 
-const PROFILE = gql`
-  query GetDevsList($email: String!) {
-    devs(query: { email: $email }) {
-      _id
-      id
-      createdAt
-      description
-      email
-      job
-      location {
-        lat
-        lng
-      }
-      name
-      phone
-      photo
-      stack {
-        name
-        xp
-      }
-      state
-    }
-  }
-`;
-
 export default function UserProfile() {
-  const { email } = useSelector((state: IAppState) => state.auth);
-  const { loading, error, data } = useQuery(PROFILE, {
-    variables: { email: email },
-  });
+  const { getUser } = useUser();
 
   const dispatch = useDispatch();
 
@@ -110,11 +82,10 @@ export default function UserProfile() {
       dispatch(changePassword(""));
     }
   };
-  if (loading)
+  if (!getUser) {
     return (
       <View
         style={{
-          flex: 1,
           position: "absolute",
           width: "100%",
           height: "100%",
@@ -123,23 +94,25 @@ export default function UserProfile() {
           alignItems: "center",
         }}
       >
-        <ActivityIndicator size="large" color="#fff" />
+        <Text>Erro ao carregar dados do usuário</Text>
       </View>
     );
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfilePicture image={data.devs[0].photo} updatePic={true} />
+      <ProfilePicture image={getUser?.photo} updatePic={true} />
 
       <View style={{ marginVertical: 20, width: "100%" }}>
         {userData({
           title: "Nome",
-          text: data.devs[0].name,
+          text: getUser.name,
           screenTarget: "Editar Nome",
         })}
 
         {userData({
           title: "E-mail",
-          text: email,
+          text: getUser.email,
           screenTarget: "Editar E-mail",
         })}
 
@@ -151,7 +124,7 @@ export default function UserProfile() {
 
         {userData({
           title: "Categoria",
-          text: category,
+          text: getUser.job,
           screenTarget: "Selecionar Categoria",
         })}
 
@@ -163,7 +136,7 @@ export default function UserProfile() {
 
         {userData({
           title: "Descrição",
-          text: description,
+          text: getUser.description.slice(0, 30) + "...",
           screenTarget: "Editar Descrição",
         })}
 

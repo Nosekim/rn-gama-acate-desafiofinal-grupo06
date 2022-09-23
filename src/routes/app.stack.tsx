@@ -17,32 +17,35 @@ import Support from "../views/UserProfile/Support";
 
 import FilterDevs from "../views/FilterDevs";
 import ViewProfile from "../views/ViewProfile";
+import { UserProvider } from "../contexts/userContext";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 function AppStack() {
   return (
     <ApolloGraphQL>
-      <Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Screen name="Home" component={Home} />
-        <Screen name="Notificações" component={Notifications} />
-        <Screen name="Filtrar Devs" component={FilterDevs} />
-        <Screen name="Termos de Uso" component={Terms} />
-        <Screen name="Política de Privacidade" component={PrivacyPolicy} />
-        <Screen name="Editar Nome" component={EditName} />
-        <Screen name="Editar E-mail" component={EditEmail} />
-        <Screen name="Editar Senha" component={EditPassword} />
-        <Screen name="Selecionar Categoria" component={SelectCategory} />
-        <Screen name="Selecionar Tecnologias" component={SelectStacks} />
-        <Screen name="Editar Descrição" component={EditDescription} />
-        <Screen name="Fale Conosco" component={Support} />
+      <UserProvider>
+        <Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Screen name="Home" component={Home} />
+          <Screen name="Notificações" component={Notifications} />
+          <Screen name="Filtrar Devs" component={FilterDevs} />
+          <Screen name="Termos de Uso" component={Terms} />
+          <Screen name="Política de Privacidade" component={PrivacyPolicy} />
+          <Screen name="Editar Nome" component={EditName} />
+          <Screen name="Editar E-mail" component={EditEmail} />
+          <Screen name="Editar Senha" component={EditPassword} />
+          <Screen name="Selecionar Categoria" component={SelectCategory} />
+          <Screen name="Selecionar Tecnologias" component={SelectStacks} />
+          <Screen name="Editar Descrição" component={EditDescription} />
+          <Screen name="Fale Conosco" component={Support} />
 
-        <Screen name="Perfil do Dev" component={ViewProfile} />
-      </Navigator>
+          <Screen name="Perfil do Dev" component={ViewProfile} />
+        </Navigator>
+      </UserProvider>
     </ApolloGraphQL>
   );
 }
