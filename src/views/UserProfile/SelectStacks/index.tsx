@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
 import { Picker } from '@react-native-picker/picker';
 
-import { IUserState, IDevsState } from '../../../types';
+import { IAppState } from '../../../types';
 
 import TopBarNav from "../../../components/TopBarNav";
 import ShowError from "../../../components/ShowError";
@@ -28,10 +28,11 @@ export default function SelectStacks() {
 
     const dispatch = useDispatch();
 
-    const { stacks } = useSelector((state: IDevsState) => state.devs);
+    const { stacks } = useSelector((state: IAppState) => state.devs);
 
-    const { userStacks } = useSelector((state: IUserState) => state.user);
+    const { userStacks } = useSelector((state: IAppState) => state.user);
 
+console.log("userStacks", userStacks)
     return(
         <SafeAreaView style={{ flex: 1 }}>
 

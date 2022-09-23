@@ -14,7 +14,7 @@ import {
     TextContent,
     ContainerLink } from '../../global/GlobalStyles';
 
-import { IAuthState } from '../../types';
+import { IAppState } from '../../types';
 
 import TopBarNav from '../../components/TopBarNav';
 import ProcessingAction from '../../components/ProcessingAction';
@@ -36,7 +36,7 @@ export default function AccpuntVerification() {
     const [code, setCode] = useState('');
     const [validated, setValidated] = useState(false);
 
-    const { email, password, recoveringPassword } = useSelector((state: IAuthState) => state.auth);
+    const { email, password, recoveringPassword } = useSelector((state: IAppState) => state.auth);
 
     useEffect(() => {
         dispatch(changeProcessingAction(false));

@@ -1,16 +1,14 @@
-import { ActivityIndicator, ScrollView, View } from "react-native";
-import { useEffect, useState } from "react";
+import { Text, ScrollView, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import { Auth } from "aws-amplify";
-import { gql, useQuery } from "@apollo/client";
 
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
 
-import { IUserState, IAuthState } from "../../types";
+import { IAppState } from "../../types";
 
 import ProfilePicture from "../../components/ProfilePicture";
 
@@ -22,31 +20,6 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "../../contexts/userContext";
 
-const PROFILE = gql`
-  query GetDevsList($email: String!) {
-    devs(query: { email: $email }) {
-      _id
-      id
-      createdAt
-      description
-      email
-      job
-      location {
-        lat
-        lng
-      }
-      name
-      phone
-      photo
-      stack {
-        name
-        xp
-      }
-      state
-    }
-  }
-`;
-
 interface IUserData {
   title: string;
   text: string;
@@ -54,17 +27,14 @@ interface IUserData {
 }
 
 export default function UserProfile() {
-  const { email } = useSelector((state: IAuthState) => state.auth);
-  const { loading, error, data } = useQuery(PROFILE, {
-    variables: { email: email },
-  });
+  const { getUser } = useUser();
 
   const dispatch = useDispatch();
 
   const nav = useNavigation();
 
-  const { category, userStacks, description, photoUser } = useSelector(
-    (state: IUserState) => state.user
+  const { category, userStacks, description } = useSelector(
+    (state: IAppState) => state.user
   );
 
   const textStacks = () => {
@@ -112,21 +82,37 @@ export default function UserProfile() {
       dispatch(changePassword(""));
     }
   };
+  if (!getUser) {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text>Erro ao carregar dados do usuário</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfilePicture image={photoUser} updatePic={true} />
+      <ProfilePicture image={getUser?.photo} updatePic={true} />
 
       <View style={{ marginVertical: 20, width: "100%" }}>
         {userData({
           title: "Nome",
-          text: data?.name,
+          text: getUser.name,
           screenTarget: "Editar Nome",
         })}
 
         {userData({
           title: "E-mail",
-          text: data?.email,
+          text: getUser.email,
           screenTarget: "Editar E-mail",
         })}
 
@@ -138,7 +124,7 @@ export default function UserProfile() {
 
         {userData({
           title: "Categoria",
-          text: data?.job,
+          text: getUser.job,
           screenTarget: "Selecionar Categoria",
         })}
 
@@ -150,7 +136,7 @@ export default function UserProfile() {
 
         {userData({
           title: "Descrição",
-          text: data?.description.slice(0, 30) + "...",
+          text: getUser.description.slice(0, 30) + "...",
           screenTarget: "Editar Descrição",
         })}
 

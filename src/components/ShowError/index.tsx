@@ -1,7 +1,7 @@
 import { Modal, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IInfoState } from '../../types';
+import { IAppState } from '../../types';
 
 import { ModalFrame, ModalBody } from './styles';
 import { TextContent } from '../../global/GlobalStyles';
@@ -12,7 +12,7 @@ export default function ShowError() {
 
     const dispatch = useDispatch();
 
-    const { showError, msgError } = useSelector((state: IInfoState) => state.info);
+    const { showError, msgError } = useSelector((state: IAppState) => state.info);
 
     const closeModal = () => dispatch(changeStatusError(false));
 

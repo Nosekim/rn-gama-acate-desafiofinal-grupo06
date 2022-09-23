@@ -74,7 +74,7 @@ export default function Home() {
             tabBarIcon: ({ focused, color }: IIcon) => (
               <MaterialCommunityIcons
                 name={focused ? "account-search" : "account-search-outline"}
-                size={26}
+                size={30}
                 color={color}
               />
             ),
@@ -89,7 +89,7 @@ export default function Home() {
             tabBarIcon: ({ focused, color }: IIcon) => (
               <Octicons
                 name={focused ? "heart-fill" : "heart"}
-                size={20}
+                size={24}
                 color={color}
               />
             ),
@@ -104,7 +104,7 @@ export default function Home() {
             tabBarIcon: ({ focused, color }: IIcon) => (
               <FontAwesome5
                 name={focused ? "user-alt" : "user"}
-                size={18}
+                size={22}
                 color={color}
               />
             ),

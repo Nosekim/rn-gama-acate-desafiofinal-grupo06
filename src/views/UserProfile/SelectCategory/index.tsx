@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Picker } from "@react-native-picker/picker";
 import { gql, useMutation, useQuery } from "@apollo/client";
 
-import { IAuthState } from "../../../types";
+import { IAppState } from "../../../types";
 
 import TopBarNav from "../../../components/TopBarNav";
 import ProcessingAction from "../../../components/ProcessingAction";
@@ -55,7 +55,7 @@ const CHANGE_CATEGORY_MUTATION = gql`
 `;
 
 export default function SelectCategory() {
-  const { email } = useSelector((state: IAuthState) => state.auth);
+  const { email } = useSelector((state: IAppState) => state.auth);
   const {
     loading: profileLoading,
     error: errorProfile,

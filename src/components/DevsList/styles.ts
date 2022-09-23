@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import styled from "styled-components/native";
 
-export const DevCard = styled.TouchableOpacity`
+export const DevCard = styled.View`
     background-color: #424143;
     elevation: 2;
     border-radius: 12px;
