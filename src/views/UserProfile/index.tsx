@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import { Auth } from "aws-amplify";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 import styles, { DataOption, TextData } from "./style";
 import { Label } from "../../global/GlobalStyles";
@@ -19,12 +19,8 @@ import {
   changeEmail,
   changePassword,
 } from "../../store/modules/auth/reducer";
-
-interface IUserData {
-  title: string;
-  text: string;
-  screenTarget: string;
-}
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../../contexts/userContext";
 
 const PROFILE = gql`
   query GetDevsList($email: String!) {
@@ -50,6 +46,12 @@ const PROFILE = gql`
     }
   }
 `;
+
+interface IUserData {
+  title: string;
+  text: string;
+  screenTarget: string;
+}
 
 export default function UserProfile() {
   const { email } = useSelector((state: IAuthState) => state.auth);
@@ -97,31 +99,20 @@ export default function UserProfile() {
   };
 
   const signOut = async () => {
-    const result = await Auth.signOut();
-  
-    if (result) {
-
+    let hasError;
+    try {
+      await Auth.signOut();
+    } catch (error) {
+      hasError = true;
+    }
+    if (!hasError) {
+      await AsyncStorage.removeItem("@localToken");
       dispatch(changeIsLoggedIn(false));
       dispatch(changeEmail(""));
       dispatch(changePassword(""));
     }
   };
-  if (loading)
-    return (
-      <View
-        style={{
-          flex: 1,
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(0,0,0,0.5)",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator size="large" color="#fff" />
-      </View>
-    );
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <ProfilePicture image={photoUser} updatePic={true} />
@@ -129,13 +120,13 @@ export default function UserProfile() {
       <View style={{ marginVertical: 20, width: "100%" }}>
         {userData({
           title: "Nome",
-          text: data.devs[0].name,
+          text: data?.name,
           screenTarget: "Editar Nome",
         })}
 
         {userData({
           title: "E-mail",
-          text: email,
+          text: data?.email,
           screenTarget: "Editar E-mail",
         })}
 
@@ -147,7 +138,7 @@ export default function UserProfile() {
 
         {userData({
           title: "Categoria",
-          text: category,
+          text: data?.job,
           screenTarget: "Selecionar Categoria",
         })}
 
@@ -159,7 +150,7 @@ export default function UserProfile() {
 
         {userData({
           title: "Descrição",
-          text: description,
+          text: data?.description.slice(0, 30) + "...",
           screenTarget: "Editar Descrição",
         })}
 

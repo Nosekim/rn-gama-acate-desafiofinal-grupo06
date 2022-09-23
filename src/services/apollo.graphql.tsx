@@ -4,7 +4,8 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { Alert } from "react-native";
+import { useDispatch } from "react-redux";
+import { ActivityIndicator, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -32,15 +33,22 @@ const authLink = (token: string) =>
     };
   });
 
-const client = (token: string) =>
-  new ApolloClient({
+const client = (token: string, apolloReady: any) => {
+  return new ApolloClient({
     link: authLink(token).concat(httpLink),
     cache: new InMemoryCache(),
   });
+};
 
 const ApolloGraphQL = ({ children }: Props) => {
+  const dispatch = useDispatch();
   const [userToken, setUserToken] = useState<string | null>(null);
+<<<<<<< HEAD
   const { token } = useSelector((state: IUserState) => state.user);
+=======
+  const [apolloReady, setApolloReady] = useState<boolean>(false);
+  const { token } = useSelector((state: any) => state.user);
+>>>>>>> eb371254c5bd5000348f4ea315e768cb9b74b404
   useEffect(() => {
     (async () => {
       try {
@@ -73,6 +81,7 @@ const ApolloGraphQL = ({ children }: Props) => {
 
   if (!userToken) {
     return (
+<<<<<<< HEAD
       <View style={{ flex: 1, backgroundColor: "#272629" }}>
 
         <DescriptionScreen
@@ -80,10 +89,27 @@ const ApolloGraphQL = ({ children }: Props) => {
           text="Estabelecendo a conexão com o servidor..."
         />
 
+=======
+      <View
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" color="#fff" />
+>>>>>>> eb371254c5bd5000348f4ea315e768cb9b74b404
       </View>
     );
   }
-  return <ApolloProvider client={client(userToken)}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={client(userToken, setApolloReady)}>
+      {children}
+    </ApolloProvider>
+  );
 };
 
 export default ApolloGraphQL;
