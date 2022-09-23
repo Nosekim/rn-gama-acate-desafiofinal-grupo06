@@ -5,6 +5,7 @@ export interface IAuth {
   password: string;
   showPassword: boolean;
   recoveringPassword: boolean;
+  apolloReady: boolean;
 }
 
 export interface ICategory {
