@@ -1,18 +1,17 @@
 import { useSelector } from "react-redux";
 import DescriptionScreen from "../../components/DescriptionScreen";
 
-import { IAppState } from "../../types";
+import { IDevsState, IDev } from "../../types";
 
 import DevsList from "../../components/DevsList";
 
 export default function Favorites() {
 
-    const { devsList, favorites } = useSelector((state: IAppState) => state.devs)
-console.log("favorites", favorites)
-console.log("DevsList", devsList)
+    const { devsList, favorites } = useSelector((state: IDevsState) => state.devs)
+
     if(favorites.length > 0) {
 
-        const favoritesDevs = devsList.filter(item => favorites.includes(item.id));
+        const favoritesDevs = devsList.filter((item: IDev) => favorites.includes(item.id));
         
         return(
             <DevsList 

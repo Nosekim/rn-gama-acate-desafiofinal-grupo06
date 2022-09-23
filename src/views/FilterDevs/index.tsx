@@ -23,7 +23,7 @@ import styles, {
     ExpStackPill, 
     TextExpPill } from './styles';
 
-import { IAppState } from '../../types';
+import { IDevsState } from '../../types';
 
 import TopBarNav from '../../components/TopBarNav';
  
@@ -39,13 +39,13 @@ export default function FilterDevs() {
 
     const nav = useNavigation();
 
-    const [stacks, setStacks] = useState([]);
+    const [stacks, setStacks] = useState<String[]>([]);
 
-    const { devsList, filters, filteredDevs } = useSelector((state: IAppState) => state.devs);
+    const { devsList, filters, filteredDevs } = useSelector((state: IDevsState) => state.devs);
 
     useEffect(() => {
 
-        let uniqueStacks = [];
+        let uniqueStacks: string[] = [];
 
         devsList.forEach(item => {
 

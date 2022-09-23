@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { Auth } from 'aws-amplify';
 
-import { IAppState } from '../../../types';
+import { IAuthState } from '../../../types';
 
 import TopBarNav from "../../../components/TopBarNav";
 import ProcessingAction from "../../../components/ProcessingAction";
@@ -32,7 +32,7 @@ export default function EditEmail() {
     const [newEmail, setNewEmail] = useState('');
     const [completed, setCompleted] = useState(false);
 
-    const { email } = useSelector((state: IAppState) => state.auth);
+    const { email } = useSelector((state: IAuthState) => state.auth);
 
     useEffect(() => {
 

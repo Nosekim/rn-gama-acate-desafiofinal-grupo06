@@ -4,18 +4,21 @@ import { FontAwesome } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 
-import { IAppState } from '../../types';
+import { IUserState } from '../../types';
 
 import { ModalFrame, ModalBody } from '../ShowError/styles';
 
-import { changeShowModalPicture, changePhotoUser } from '../../store/modules/userProfile/reducer';
+import { 
+    changeShowModalPicture, 
+    changePhotoUser,
+    changeLoadingPicture } from '../../store/modules/userProfile/reducer';
 import { changeStatusError, changeMsgError } from '../../store/modules/info/reducer';
 
 export default function ModalSelectPicture() {
 
     const dispatch = useDispatch();
 
-    const { showModalPicture } = useSelector((state: IAppState) => state.user);
+    const { showModalPicture } = useSelector((state: IUserState) => state.user);
 
     const closeModal = () => dispatch(changeShowModalPicture(false));
 
@@ -39,8 +42,9 @@ export default function ModalSelectPicture() {
 
         if(fotoAjustada) {
 
+            dispatch(changeLoadingPicture(true));
+            closeModal();
             dispatch(changePhotoUser(fotoAjustada.uri))
-            closeModal()
         }
     }
 

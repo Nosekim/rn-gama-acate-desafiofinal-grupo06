@@ -15,7 +15,7 @@ import {
 } from "../../store/modules/devsData/reducer";
 import { getDataApi } from "../../services";
 
-import { IAppState } from "../../types";
+import { IDevsState, IAuthState } from "../../types";
 
 import DevsList from "../../components/DevsList";
 import DescriptionScreen from "../../components/DescriptionScreen";
@@ -49,8 +49,8 @@ const DEVS_QUERY = gql`
 `;
 
 export default function Devs() {
-  const { categories, stacks, filteredDevs } = useSelector((state: IAppState) => state.devs);
-  const { email } = useSelector((state: IAppState) => state.auth);
+  const { categories, stacks, filteredDevs } = useSelector((state: IDevsState) => state.devs);
+  const { email } = useSelector((state: IAuthState) => state.auth);
   const { loading, error, data } = useQuery(DEVS_QUERY, {
     variables: { email: email },
   });

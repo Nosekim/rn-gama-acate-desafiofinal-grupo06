@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import { Auth } from 'aws-amplify';
 
-import { IAppState } from '../../../types';
+import { IAuthState } from '../../../types';
 
 import TopBarNav from "../../../components/TopBarNav";
 import ProcessingAction from "../../../components/ProcessingAction";
@@ -33,7 +33,7 @@ export default function EditPassword() {
     const [newPassword, setNewPassword] = useState('');
     const [completed, setCompleted] = useState(false);
 
-    const { password, showPassword } = useSelector((state: IAppState) => state.auth);
+    const { password, showPassword } = useSelector((state: IAuthState) => state.auth);
 
     useEffect(() => {
         dispatch(changeProcessingAction(false));

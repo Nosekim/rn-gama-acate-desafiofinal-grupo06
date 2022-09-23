@@ -7,6 +7,7 @@ const initialState = {
   name: "",
   photoUser: "",
   showModalPicture: false,
+  loadingPicture: false,
   category: "",
   userStacks: [],
   state: "",
@@ -49,7 +50,13 @@ const UserReducer = createSlice({
     },
     changePhotoUser: (state: IUserProfile, action: PayloadAction<string>) => {
       state.photoUser = action.payload;
-    }
+    },
+    changeLoadingPicture: (
+      state: IUserProfile,
+      action: PayloadAction<boolean>
+    ) => {
+      state.loadingPicture = action.payload;
+    },
   },
 });
 
@@ -62,6 +69,7 @@ export const {
   changeShowModalPicture,
   changePhotoUser,
   changeDescription,
+  changeLoadingPicture,
   setToken
 } = UserReducer.actions;
 

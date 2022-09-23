@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Feather } from '@expo/vector-icons';
 
-import { IAppState } from "../../types";
+import { IAuthState } from "../../types";
 
 import { changeShowPassword } from "../../store/modules/auth/reducer";
 
@@ -15,7 +15,7 @@ export default function ShowPassword({ top }: IIcon) {
 
     const dispatch = useDispatch();
 
-    const { showPassword } = useSelector((state: IAppState) => state.auth);
+    const { showPassword } = useSelector((state: IAuthState) => state.auth);
 
     useEffect(() => {
         dispatch(changeShowPassword(false));

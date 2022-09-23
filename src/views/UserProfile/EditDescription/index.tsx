@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector, useDispatch } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 
-import { IAppState } from '../../../types';
+import { IUserState } from '../../../types';
 
 import TopBarNav from "../../../components/TopBarNav";
 import ProcessingAction from "../../../components/ProcessingAction";
@@ -31,7 +31,7 @@ export default function EditDescription() {
     const [newDescription, setNewDescription] = useState('');
     const [completed, setCompleted] = useState(false);
 
-    const { description } = useSelector((state: IAppState) => state.user);
+    const { description } = useSelector((state: IUserState) => state.user);
 
     useEffect(() => {
 

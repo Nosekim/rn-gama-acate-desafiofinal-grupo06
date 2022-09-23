@@ -2,7 +2,7 @@ import { Modal, View, ActivityIndicator } from 'react-native';
 import { TextContent } from '../../global/GlobalStyles';
 import { useSelector } from 'react-redux';
 
-import { IAppState } from '../../types';
+import { IInfoState } from '../../types';
 
 interface IProcessingAction {
     text: string;
@@ -10,7 +10,7 @@ interface IProcessingAction {
 
 export default function ProcessingAction({ text }: IProcessingAction) {
 
-    const { processingAction } = useSelector((state: IAppState) => state.info);
+    const { processingAction } = useSelector((state: IInfoState) => state.info);
 
     return(
         <Modal
