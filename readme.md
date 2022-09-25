@@ -80,7 +80,3 @@ cd rn-gama-acate-desafiofinal-grupo06
 - Rode a aplicação:
 
 ```npx expo start```
-
-
-## TODO:
-- [ ] Atualizar readme com os dados do projeto.
