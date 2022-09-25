@@ -8,29 +8,53 @@
     width="300">
 </div>
 
+## Objetivos 🎯
+
+- Criação e autenticação de usuários.
+- Criação de listas com os dados dos devs presentes na base de dados.
+- Filtrar os dados para ver apenas os perfis com os parâmetros designados.
+- Visualizar os dados do perfil de cada dev ao se clicar nele.
+- Favoritar os devs que desejar.
+- Usuários podem editar os dados de acordo com o seu próprio perfil.
+
 ## ✔️ tecnologias utilizadas
 - ``Expo``
 - ``React Native``
 - ``Typescript``
 - ``GraphQL``
 - ``SSO AWS Cognito``
+- ``Amplify``
 
 ## ✔️ técnicas utilizadas
 - ``Consumo de API externa com axios``
 - ``Criação de listas``
+- ``Filtragem de dados``
 - ``Abstração``
+- ``Manipulação de imagem vinda da câmera ou galeria``
 
-## Objetivos 🎯
-
-- Fazer o acompanhamento das aulas e masterclass do programa Dev For Tech I Mobile (React Native) - Turma 05.
-- Revisão de conceitos básicos de React Native.
-- Criação de listas com React Native.
-
-## Requisitos 📌
-
-- Consumir API externa com axios para obter os dados dos personagens e episodios de Rick and Morty.
-- Renderizar os dados em tela com React Native.
-- Criar um modal para mostrar os dados do personagem selecionado.
+## ✔️ Dependências utilizadas
+- @apollo/client
+- @react-native-async-storage/async-storage
+- @react-native-picker/picker
+- @react-navigation/bottom-tabs
+- @react-navigation/native
+- @react-navigation/native-stack
+- @reduxjs/toolkit
+- @types/styled-components-react-native
+- aws-amplify
+- expo-image-manipulator
+- expo-image-picker
+- expo-linear-gradient
+- expo-notifications
+- expo-status-bar
+- graphql
+- react-native-safe-area-context
+- react-native-shimmer-placeholder
+- react-native-tab-view
+- react-redux
+- realm-web
+- redux
+- styled-components
 
 ## Imagens
 | iOs  |  Android  |
@@ -55,9 +79,7 @@ cd rn-gama-acate-desafiofinal-grupo06
 
 - Rode a aplicação:
 
-|         yarn              |      npm         |
-|--------------------------|----------------------|
-|```yarn start``` |```npm run start``` |
+```npx expo start```
 
 
 ## TODO:
